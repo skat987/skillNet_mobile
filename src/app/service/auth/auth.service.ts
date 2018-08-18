@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 // Plug-ins
-import { NativeStorage } from '@ionic-native/native-storage';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 // Env
 import { environment } from './../../../environments/environment';
@@ -43,8 +43,9 @@ export class AuthService {
       .toPromise()
       .then((resp: any) => {
         console.log('logout response', resp);
-        this.storage.remove('user');
-        return resp;
+        this.storage.remove('user')
+        .then(() => console.log('user out'))
+        .catch(e => console.log('Error user still in !'));
       });
     })
     .catch((e) => console.log('Error logout: ', e));
@@ -52,6 +53,12 @@ export class AuthService {
 
   public isLogged(): boolean {
     return (this.storage.getItem('user')) ? true : false;
+  }
+
+  public getAuth(): Promise<any> {
+    return this.storage.getItem('user')
+    .then(user => user)
+    .catch(e => console.log('Error storage user', e));
   }
 
 }

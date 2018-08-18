@@ -11,11 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 // Plug-ins
-import { NativeStorage } from '@ionic-native/native-storage';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 // Service
 import { AuthService } from './service/auth/auth.service';
-import { ApiService } from './service/api/api.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +26,6 @@ import { ApiService } from './service/api/api.service';
     AppRoutingModule
   ],
   providers: [
-    ApiService,
     AuthService,
     NativeStorage,
     StatusBar,
