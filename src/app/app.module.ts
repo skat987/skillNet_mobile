@@ -13,11 +13,14 @@ import { HttpClientModule } from '@angular/common/http';
 // Plug-ins
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
-// Service
+// Services
 import { AuthService } from './service/auth/auth.service';
 
+// Components
+import { MenuComponent } from './layout/menu/menu.component';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MenuComponent],
   entryComponents: [],
   imports: [
     HttpClientModule,
