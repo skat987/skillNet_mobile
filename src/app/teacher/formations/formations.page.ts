@@ -31,11 +31,11 @@ export class FormationsPage implements OnInit {
     this.authService.getAuth().then((user: any) => {
       // tslint:disable-next-line:max-line-length
       this.teacher = new Teacher(null, user.lastname, user.firstname, user.avatar, user.email, user.gender, user.birthday_date, user.phone_number, user.token);
-    }).then(() => this.setFormationsList())
+    }).then(() => this.setFormations())
     .catch(e => console.log('Error setting Teacher: ', e));
   }
 
-  private setFormationsList(): void {
+  private setFormations(): void {
     this.apiService.get('teacher/myFormations').then((resp: any) => {
       for (let i = 0; i < resp['data'].length; i++) {
         // tslint:disable-next-line:max-line-length
@@ -44,11 +44,11 @@ export class FormationsPage implements OnInit {
           this.teacher.formations[i].addModule(new ModuleFormation(resp['data'][i].modules[j].id, resp['data'][i].modules[j].name));
         }
       }
-    }).then(() => this.setStudentsLists())
+    }).then(() => this.setStudents())
     .catch(e => console.log('Error setting formations list: ', e));
   }
 
-  private setStudentsLists(): void {
+  private setStudents(): void {
     for (let i = 0; i < this.teacher.formations.length; i++) {
       this.apiService.get('getStudentsOfFormation/' + this.teacher.formations[i].id).then((resp: any) => {
         for (let j = 0; j < resp.length; j++) {

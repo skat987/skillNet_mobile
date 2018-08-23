@@ -5,19 +5,11 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card *ngIf="report">
-    <ion-card-header>
-      {{ report.author.fullName }}
-    </ion-card-header>  
-    <ion-card-content>
-      <ion-card>
-        <ion-card-header>
-          Rapport du: {{ report.date }}
-        </ion-card-header>
-        <ion-card-content>
-          {{ report.text }}
-        </ion-card-content>
-      </ion-card>
-    </ion-card-content>  
-  </ion-card>
+  <div *ngIf="report">  
+    <h3>Rapport du: {{ report.date }}</h3>
+    <h3>Rédigé par: {{ report.author.fullName }}</h3>
+    <h3>Note: {{ report.rate }}</h3>
+    <h4>Texte: </h4>
+    <p>{{ report.text }}</p>
+  </div>
 </ion-content>
