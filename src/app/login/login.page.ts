@@ -10,9 +10,7 @@ import { AuthService } from './../service/auth/auth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
   private redirect = [null, '/admin', '/teacher/formations', '/student/dashboard'];
-
   public loginData = { email: '', password: '' };
 
   constructor(private authService: AuthService, private router: Router) { }
@@ -21,18 +19,13 @@ export class LoginPage implements OnInit {
     if (this.authService.isLogged()) {
       this.authService.getAuth().then((user: any) => {
         this.router.navigate([this.redirect[user.user_type_id]]);
-      })
-      .catch(e => console.log('Error storage user: ', e));
+      }).catch(e => console.log('Error storage user: ', e));
     }
   }
 
   public doLogin(): void {
-    this.authService.login(this.loginData)
-    .subscribe((user: any) => {
-      console.log('login_data: ', user);
+    this.authService.login(this.loginData).subscribe((user: any) => {
       this.router.navigate([this.redirect[user.user_type_id]]);
-    },
-    e => console.log('login_error: ', e));
+    }, e => console.log('Error login: ', e));
   }
-
 }

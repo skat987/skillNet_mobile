@@ -30,7 +30,6 @@ export class MenuComponent implements OnInit {
       ]
     }
   ];
-
   public appPages = [];
 
   constructor(private authService: AuthService, private router: Router) { }
@@ -39,17 +38,12 @@ export class MenuComponent implements OnInit {
     if (this.authService.isLogged()) {
       this.authService.getAuth().then((user: any) => {
         this.appPages = this.menus[user.user_type_id].links;
-      })
-      .catch(e => console.log('Error init menu: ', e));
+      }).catch(e => console.log('Error init menu: ', e));
     }
   }
 
   public logout(): void {
-    console.log('logout_controle');
-    this.authService.logout().then(() => {
-      this.router.navigate(['/login']);
-    })
+    this.authService.logout().then(() => this.router.navigate(['/login']))
     .catch(e => console.log('Error logout: ', e));
   }
-
 }

@@ -14,10 +14,7 @@ const _API_URL = environment.apiUrl;
   providedIn: 'root'
 })
 export class AuthService {
-
-  constructor(private http: HttpClient, private storage: NativeStorage) {
-    console.log('Authentication service on !');
-  }
+  constructor(private http: HttpClient, private storage: NativeStorage) {}
 
   public login(loginData: any): Observable<any> {
     return this.http.post(_API_URL + 'login', loginData)
@@ -32,23 +29,18 @@ export class AuthService {
   }
 
   public logout(): Promise<any> {
-    return this.storage.getItem('user')
-    .then((user: any) => {
+    return this.storage.getItem('user').then((user: any) => {
       const headers: HttpHeaders = new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + user.token
       });
-      return this.http.get(_API_URL + 'logout', { headers: headers })
-      .toPromise()
-      .then((resp: any) => {
-        console.log('logout response', resp);
+      return this.http.get(_API_URL + 'logout', { headers: headers }).toPromise().then((resp: any) => {
         this.storage.remove('user')
-        .then(() => console.log('user out'))
-        .catch(e => console.log('Error user still in !'));
+        .then(() => console.log('user out', resp))
+        .catch(e => console.log('Error logout: ', e));
       });
-    })
-    .catch((e) => console.log('Error logout: ', e));
+    }).catch((e) => console.log('Error logout: ', e));
   }
 
   public isLogged(): boolean {
@@ -60,5 +52,4 @@ export class AuthService {
     .then(user => user)
     .catch(e => console.log('Error storage user', e));
   }
-
 }
