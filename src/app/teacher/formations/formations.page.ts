@@ -39,7 +39,7 @@ export class FormationsPage implements OnInit {
     this.apiService.get('teacher/myFormations').then((resp: any) => {
       for (let i = 0; i < resp['data'].length; i++) {
         // tslint:disable-next-line:max-line-length
-        this.teacher.addFormation(new Formation(resp['data'][i].id, resp['data'][i].name, resp['data'][i].logo, resp['data'][i].start_at, resp['data'][i].end_at));
+        this.teacher.addFormation(new Formation(resp['data'][i].id, resp['data'][i].name, resp['data'][i].logo, resp['data'][i].start_at, resp['data'][i].end_at, resp['data'][i].total_students));
         for (let j = 0; j < resp['data'][i].modules.length; j++) {
           this.teacher.formations[i].addModule(new ModuleFormation(resp['data'][i].modules[j].id, resp['data'][i].modules[j].name));
         }
@@ -53,7 +53,7 @@ export class FormationsPage implements OnInit {
       this.apiService.get('getStudentsOfFormation/' + this.teacher.formations[i].id).then((resp: any) => {
         for (let j = 0; j < resp.length; j++) {
           // tslint:disable-next-line:max-line-length
-          this.teacher.formations[i].addStudent(new Student(resp[j].id, resp[j].lastname, resp[j].firstname, resp[j].avatar, resp[j].email, resp[j].gender, null, null, null, null, null, new ProgressionTotal(resp[j].progression.totalSkills, resp[j].progression.studentValidations, resp[j].progression.teacherValidations)));
+          this.teacher.formations[i].addStudent(new Student(resp[j].id, resp[j].lastname, resp[j].firstname, resp[j].avatar, resp[j].email, resp[j].gender, resp[j].birthday_date, resp[j].phone_number, null, resp[j].student_id, this.teacher.formations[i].id, new ProgressionTotal(resp[j].progression.totalSkills, resp[j].progression.studentValidations, resp[j].progression.teacherValidations)));
         }
       }).catch(e => console.log('Error setting students Lists : ', e));
     }

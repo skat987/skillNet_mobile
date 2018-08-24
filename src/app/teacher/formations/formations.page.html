@@ -35,7 +35,7 @@
           </ion-list>
           <ion-list *ngIf="formation.students.length">
             <ion-list-header>
-              Etudiants de la formation
+              Etudiants de la formation: {{ formation.studentCount }}
             </ion-list-header>
             <ion-item *ngFor="let student of formation.students" (click)="showStudentDashBoard(student.id, formation.id)">
               <ion-icon name="arrow-forward" item-end></ion-icon>
@@ -45,6 +45,8 @@
               <ion-label>
                 <h2>nom: {{ student.fullName }}</h2>
                 <h3>mail: {{ student.email }}</h3>
+                <p>validations formateur: {{ student.progression.teacherValidations }}</p>
+                <p>validations étudiante: {{ student.progression.studentValidations }}</p>
               </ion-label>
             </ion-item>
           </ion-list>

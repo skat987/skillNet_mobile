@@ -32,7 +32,10 @@ export class ApiService {
     return new Promise(resolve => {
       this.setHeaders().then(() => {
         this.http.get(_API_URL + url, this.options)
-        .subscribe(resp => resolve(resp), e => console.log(e));
+        .subscribe(resp => {
+          console.log('data get: ', resp);
+          resolve(resp);
+        }, e => console.log(e));
       }).catch(e => console.log('Error "get" data: ', e));
     });
   }

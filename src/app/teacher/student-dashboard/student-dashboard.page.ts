@@ -8,6 +8,7 @@ import { ApiService } from '../../service/api/api.service';
 // Models
 import { Skill } from '../../models/skill';
 import { Student } from '../../models/student';
+import { Teacher } from '../../models/teacher';
 import { ModuleFormation } from '../../models/module-formation';
 import { ProgressionTotal } from '../../models/progression-total';
 import { ProgressionDetails } from '../../models/progression-details';
@@ -40,7 +41,7 @@ export class StudentDashboardPage implements OnInit {
         currentModule = new ModuleFormation(resp['modules'][i].id, resp['modules'][i].name, new ProgressionTotal(resp['modules'][i].totalSkills, resp['modules'][i].progression.student, resp['modules'][i].progression.teacher));
         for (let j = 0; j < resp['modules'][i].skills.length; j++) {
           // tslint:disable-next-line:max-line-length
-          currentModule.addSkill(new Skill(resp['modules'][i].skills[j].id, resp['modules'][i].skills[j].name, new ProgressionDetails(resp['modules'][i].skills[j].progression.student_progression_id, resp['modules'][i].skills[j].progression.student_validation, resp['modules'][i].skills[j].progression.student_validation_date, resp['modules'][i].skills[j].progression.teacher_validation, resp['modules'][i].skills[j].progression.teacher_validation_date)));
+          currentModule.addSkill(new Skill(resp['modules'][i].skills[j].id, resp['modules'][i].skills[j].name, new ProgressionDetails(resp['modules'][i].skills[j].progression.student_progression_id, resp['modules'][i].skills[j].progression.student_validation, resp['modules'][i].skills[j].progression.student_validation_date, resp['modules'][i].skills[j].progression.teacher_validation, resp['modules'][i].skills[j].progression.teacher_validation_date), new Teacher(null, resp['modules'][i].skills[j].teacher.lastname, resp['modules'][i].skills[j].teacher.firstname)));
         }
         this.modules.push(currentModule);
       }

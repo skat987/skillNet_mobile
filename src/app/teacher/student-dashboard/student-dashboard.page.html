@@ -29,7 +29,10 @@
     <div *ngIf="moduleSelected.skills.length">      
       <ion-list *ngFor="let skill of moduleSelected.skills">
         <ion-item>
-          <ion-label>{{ skill.name }}</ion-label>          
+          <ion-label>Compétences: {{ skill.name }}</ion-label>          
+        </ion-item>
+        <ion-item>
+          <ion-label>Formateur: {{ skill.teacher.fullName }}</ion-label>          
         </ion-item>
         <ion-item>
           <ion-label>Validation du formateur</ion-label>

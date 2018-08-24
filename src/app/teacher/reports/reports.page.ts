@@ -40,7 +40,7 @@ export class ReportsPage implements OnInit {
       this.apiService.get('reportsByFormation/' + this.formations[i].id).then((resp: any) => {
         for (let j = 0; j < resp.length; j++) {
           // tslint:disable-next-line:max-line-length
-          this.formations[i].addReport(new Report(resp[j].report_id, resp[j].report_date, new Student(resp[j].student_id, resp[j].student[0].lastname, resp[j].student[0].firstname),  null, resp[j].report_rate, resp[j].report_is_daily, resp[j].created_at, resp[j].updated_at));
+          this.formations[i].addReport(new Report(resp[j].report_id, resp[j].report_title, resp[j].report_date, new Student(null, resp[j].student[0].lastname, resp[j].student[0].firstname, null, null, null, null, null, null, resp[j].student_id, resp[j].formation_id),  null, resp[j].report_rate, resp[j].report_is_daily, resp[j].created_at, resp[j].updated_at));
         }
       }).catch(e => console.log('Error setting reports: ', e));
     }

@@ -3,6 +3,7 @@ import { Student } from './student';
 
 export class Report {
     id: any;
+    title: any;
     date: any;
     author: Student;
     text: any;
@@ -11,8 +12,10 @@ export class Report {
     updatedAt: any;
     createdAt: any;
 
-    constructor (id?: any, date?: any, author?: Student, text?: any, rate?: any, isDaily?: any, createdAt?: any, updatedAt?: any) {
+    // tslint:disable-next-line:max-line-length
+    constructor (id?: any, title?: any, date?: any, author?: Student, text?: any, rate?: any, isDaily?: any, createdAt?: any, updatedAt?: any) {
         this.id = id;
+        this.title = title;
         this.date = date;
         this.author = author;
         this.text = text;
