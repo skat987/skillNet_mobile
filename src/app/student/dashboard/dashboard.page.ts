@@ -20,7 +20,7 @@ import { ApiService } from '../../service/api/api.service';
 export class DashboardPage implements OnInit {
   public student: Student;
   public modules: ModuleFormation[] = [];
-  public moduleSelected: ModuleFormation = new ModuleFormation();
+  public moduleSelected: ModuleFormation;
 
   constructor(private platform: Platform, private authService: AuthService, private apiService: ApiService) { }
 
@@ -30,7 +30,8 @@ export class DashboardPage implements OnInit {
 
   private setStudent(): void {
     this.authService.getAuth().then((user: any) => {
-      this.student = new Student(user.student_id, user.lastname, user.firstname, user.avatar, user.email, user.gender);
+      // tslint:disable-next-line:max-line-length
+      this.student = new Student(null, user.lastname, user.firstname, user.avatar, user.email, user.gender, user.birthday_date, user.phone_number, user.token, user.student_id, user.formation_id);
     }).then(() => this.setModules())
     .catch(e => console.log('Error setting student: ', e));
   }
@@ -51,8 +52,8 @@ export class DashboardPage implements OnInit {
     }).catch(e => console.log('Error setting modules: ', e));
   }
 
-  public ShowModule(moduleId: any): void {
-    this.moduleSelected = this.modules[this.modules.findIndex((module) => module.id === moduleId)];
+  public ShowModule(module: ModuleFormation): void {
+    this.moduleSelected = module;
   }
 
   public updateValidation(progressionId: any, validation: any): void {

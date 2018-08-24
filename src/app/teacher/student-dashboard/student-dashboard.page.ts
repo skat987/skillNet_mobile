@@ -21,7 +21,7 @@ import { ProgressionDetails } from '../../models/progression-details';
 export class StudentDashboardPage implements OnInit {
   public student: Student;
   public modules: ModuleFormation[] = [];
-  public moduleSelected: ModuleFormation = new ModuleFormation();
+  public moduleSelected: ModuleFormation;
 
   constructor(private platform: Platform, private route: ActivatedRoute, private apiService: ApiService) { }
 
@@ -48,8 +48,8 @@ export class StudentDashboardPage implements OnInit {
     }).catch(e => console.log('Error getting student data: ', e));
   }
 
-  public ShowModule(moduleId: any): void {
-    this.moduleSelected = this.modules[this.modules.findIndex((module) => module.id === moduleId)];
+  public ShowModule(module: ModuleFormation): void {
+    this.moduleSelected = module;
   }
 
   public updateValidation(progressionId: any, validation: any): void {
