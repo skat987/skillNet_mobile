@@ -29,7 +29,7 @@ export class ReportsPage implements OnInit {
       this.formation = new Formation(resp['data'][0].formation_id, resp['data'][0].name);
       for (let i = 0; i < resp['data'].length; i++) {
         // tslint:disable-next-line:max-line-length
-        this.formation.addReport(new Report(resp['data'][i].report_id, resp['data'][i].report_date, new Student(resp['data'][i].student_id, resp['data'][i].studentLastname, resp['data'][i].studentLastname), resp['data'][i].text, resp['data'][i].report_rate, resp['data'][i].is_daily, resp['data'][i].created_date, resp['data'][i].last_edit_date));
+        this.formation.addReport(new Report(resp['data'][i].report_id, resp['data'][i].report_title, resp['data'][i].report_date, new Student(null, resp['data'][i].studentLastname, resp['data'][i].studentFirstname), resp['data'][i].text, resp['data'][i].report_rate, resp['data'][i].is_daily, resp['data'][i].created_date, resp['data'][i].last_edit_date));
       }
     }).catch(e => console.log('Error setting formation: ', e));
   }

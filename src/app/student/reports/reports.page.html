@@ -6,14 +6,13 @@
 
 <ion-content padding>
   <ion-card *ngIf="formation">
-    <ion-img src="{{ formation.logo }}"></ion-img>
-  
     <ion-card-content>
       <ion-card-title>{{ formation.name }}</ion-card-title>
   
       <ion-list *ngIf="formation.reports.length">
         <ion-item *ngFor="let report of formation.reports" (click)="showReport(report.id, formation.id)">
           <ion-label>
+            <h1>Titre: {{ report.title }}</h1>
             <h2>Rapport du: {{ report.date }}</h2>
             <h3>Rédigé par: {{ report.author.fullName }}</h3>
             <p>note: {{ report.rate }}</p>
