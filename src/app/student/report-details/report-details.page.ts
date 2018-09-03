@@ -25,9 +25,9 @@ export class ReportDetailsPage implements OnInit {
   }
 
   private setReport(reportId: any, formationId: any): void {
-    this.apiService.get('getReport/' + reportId + '/ofFormation/' + formationId).then((resp: any) => {
+    this.apiService.get('reportofStudent/' + reportId + '/of/' + formationId).then((resp: any) => {
       // tslint:disable-next-line:max-line-length
-      this.report = new Report(resp[0].report_id, resp[0].report_date, new Student(resp[0].student_id, resp[0].author[0].lastname, resp[0].author[0].firstname), resp[0].text, resp[0].created_at);
+      this.report = new Report(resp[0].report_id, resp[0].title, resp[0].report_date, new Student(null, resp[0].student[0].lastname, resp[0].student[0].firstname, null, null, null, null, null, null, resp[0].student_id, resp[0].formation_id), resp[0].text, resp[0].rate, resp[0].report_is_daily, resp[0].created_at, resp[0].updated_at);
     }).catch(e => console.log('Error setting report: ', e));
   }
 }
