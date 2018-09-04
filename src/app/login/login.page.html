@@ -5,14 +5,14 @@
 </ion-header>
 
 <ion-content padding>
-  <form (submit)="doLogin()">
+  <form [formGroup]="loginForm" (submit)="doLogin()">
     <ion-item>
       <ion-label stacked>Email</ion-label>
-      <ion-input [(ngModel)]="loginData.email" name="email" type="text" placeholder="email"></ion-input>
+      <ion-input formControlName="email" type="email" placeholder="Votre email"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Password</ion-label>
-      <ion-input [(ngModel)]="loginData.password" name="password" type="password" placeholder="Password"></ion-input>
+      <ion-input formControlName="password" type="password" placeholder="Votre mot de passe"></ion-input>
     </ion-item>
     <ion-button shape="round" color="primary" fill="outline" type="submit">
       Log In
