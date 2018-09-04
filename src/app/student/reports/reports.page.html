@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-button shape="round" color="primary" fill="outline" (click)="addReport()">Ajouter un rapport</ion-button>
   <ion-card *ngIf="formation">
     <ion-card-content>
       <ion-card-title>{{ formation.name }}</ion-card-title>

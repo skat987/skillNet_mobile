@@ -48,4 +48,13 @@ export class ApiService {
       }).catch(e => console.log('Error "put" data: ', e));
     });
   }
+
+  public post(url, data): Promise<any> {
+    return new Promise(resolve => {
+      this.setHeaders().then(() => {
+        this.http.post(_API_URL + url, data, this.options)
+        .subscribe(resp => resolve(resp), e => console.log(e));
+      }).catch(e => console.log('Error "post" data: ', e));
+    });
+  }
 }

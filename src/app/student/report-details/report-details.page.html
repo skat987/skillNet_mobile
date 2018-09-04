@@ -5,11 +5,21 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-button shape="round" color="primary" fill="outline" (click)="addReport()">Ajouter un rapport</ion-button>
   <div *ngIf="report">  
     <h3>Rapport du: {{ report.date }}</h3>
     <h3>Rédigé par: {{ report.author.fullName }}</h3>
     <h3>Note: {{ report.rate }}</h3>
     <h4>Texte: </h4>
     <p>{{ report.text }}</p>
+    <ion-list *ngIf="report.comments.length">
+      <ion-list-header>
+        Commentaires du rapport: {{ report.comments.length }}
+      </ion-list-header>
+
+      <ion-item *ngFor="let comment of report.comments">
+        {{ comment.author.fullName }} / {{ comment.createdAt }}
+      </ion-item>
+    </ion-list>
   </div>
 </ion-content>

@@ -1,5 +1,6 @@
 // Models
 import { Student } from './student';
+import { Comment } from './comment';
 
 export class Report {
     id: any;
@@ -11,6 +12,7 @@ export class Report {
     isDaily: any;
     updatedAt: any;
     createdAt: any;
+    comments: Comment[] = [];
 
     // tslint:disable-next-line:max-line-length
     constructor (id?: any, title?: any, date?: any, author?: Student, text?: any, rate?: any, isDaily?: any, createdAt?: any, updatedAt?: any) {
@@ -23,5 +25,9 @@ export class Report {
         this.isDaily = isDaily;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public addComment(comment: Comment): void {
+        this.comments.push(comment);
     }
 }
