@@ -5,5 +5,16 @@
 </ion-header>
 
 <ion-content padding>
-
+  <ion-list *ngIf="plannings.length">
+    <ion-item *ngFor="let planning of plannings" >
+      <ion-list>
+        <ion-item>{{ planning.name }}</ion-item>
+        <ion-item>créer le: {{ planning.createdAt | date:"dd/MM/yyyy hh:mm"}}</ion-item>
+        <ion-item>modifier le: {{ planning.updatedAt | date:"dd/MM/yyyy hh:mm"}}</ion-item>
+        <ion-item>
+          <button pull right (click)="openFile(planning.url)"><ion-icon name="md-download"></ion-icon></button>
+        </ion-item>
+      </ion-list>
+    </ion-item>
+  </ion-list>
 </ion-content>

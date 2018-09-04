@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 
 // Plug-ins
-import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer/ngx';
+import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 
@@ -18,7 +18,7 @@ import { ApiService } from './../../service/api/api.service';
   styleUrls: ['./plannings.page.scss'],
 })
 export class PlanningsPage implements OnInit {
-  planning: Planning;
+  public planning: Planning;
 
   // tslint:disable-next-line:max-line-length
   constructor(private platform: Platform, private document: DocumentViewer, private file: File, private transfer: FileTransfer, private apiService: ApiService) { }
