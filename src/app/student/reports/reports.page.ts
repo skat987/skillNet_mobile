@@ -37,4 +37,8 @@ export class ReportsPage implements OnInit {
   public showReport(reportId: any, formationId: any): void {
     this.router.navigate(['/student/report-details', { formation: formationId, report: reportId }]);
   }
+
+  public addReport(): void {
+    this.router.navigate(['/student/report-form']);
+  }
 }

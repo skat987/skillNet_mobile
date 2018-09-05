@@ -11,10 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 // Plug-ins
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
-
-// Services
-import { AuthService } from './service/auth/auth.service';
+import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 
 // Components
 import { MenuComponent } from './layout/menu/menu.component';
@@ -32,7 +32,9 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
     AppRoutingModule
   ],
   providers: [
-    AuthService,
+    FileTransfer,
+    File,
+    DocumentViewer,
     NativeStorage,
     StatusBar,
     SplashScreen,

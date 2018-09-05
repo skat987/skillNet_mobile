@@ -21,6 +21,7 @@ const routes: Routes = [
       { path: 'student/reports', loadChildren: './student/reports/reports.module#ReportsPageModule' },
       { path: 'student/report-details', loadChildren: './student/report-details/report-details.module#ReportDetailsPageModule' },
       { path: 'student/plannings', loadChildren: './student/plannings/plannings.module#PlanningsPageModule' },
+      { path: 'student/report-form', loadChildren: './student/report-form/report-form.module#ReportFormPageModule' },
 
       // route teacher
       { path: 'teacher/formations', loadChildren: './teacher/formations/formations.module#FormationsPageModule' },
