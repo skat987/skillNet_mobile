@@ -27,7 +27,7 @@ export class ReportDetailsPage implements OnInit {
     // tslint:disable-next-line:max-line-length
     this.platform.ready().then(() => {
       this.setReport(this.route.snapshot.paramMap.get('report'), this.route.snapshot.paramMap.get('formation'));
-      this.newCommentForm = this.formBuilder.group({ commentText: ['', Validators.required] });
+      this.newCommentForm = this.formBuilder.group({ text: ['', Validators.required] });
     });
   }
 
@@ -46,11 +46,9 @@ export class ReportDetailsPage implements OnInit {
     this.router.navigate(['/student/report-form']);
   }
 
-  get f() { return this.newCommentForm.controls; }
-
   public createComment(reportId: any): void {
     if (this.newCommentForm.invalid) { return; }
-    this.apiService.post('reportComment/create', { report_id: reportId, text: this.f.commentText.value })
+    this.apiService.post('reportComment/create', { report_id: reportId, text: this.newCommentForm.controls.text.value })
     .then(resp => console.log('create comment: ', resp))
     .then(() => this.setReport(this.route.snapshot.paramMap.get('report'), this.route.snapshot.paramMap.get('formation')))
     .catch(e => console.log('Error creating comment: ', e));

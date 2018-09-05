@@ -5,5 +5,29 @@
 </ion-header>
 
 <ion-content padding>
-
+  <form [formGroup]="newReportForm" (ngSubmit)="onSubmit()">
+    <div>
+      <ion-list>
+        <ion-item>
+          <ion-label>Titre du rapport: </ion-label>
+          <ion-input formControlName="title" required type="text" placeholder="Titre"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Date: </ion-label>
+          <ion-datetime formControlName="date" required displayFormat="MM/DD/YYYY"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>Texte: </ion-label>
+          <ion-textarea formControlName="text" required placeholder="Votre texte"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label>Note: </ion-label>
+          <ion-input formControlName="rate" required type="number" placeholder="Note"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-button shape="round" color="primary" fill="outline" type="submit">
+        Valider
+      </ion-button>
+    </div>
+  </form>
 </ion-content>

@@ -13,7 +13,7 @@
     <form [formGroup]="newCommentForm" (ngSubmit)="createComment(report.id)">
       <div>
         <ion-label>Nouveau commentaire: </ion-label>
-        <ion-textarea formControlName="commentText" required type="textarea"></ion-textarea>
+        <ion-textarea formControlName="text" required type="textarea"></ion-textarea>
       </div>
       <ion-button shape="round" color="primary" fill="outline" type="submit">
         Ajouter

@@ -32,7 +32,6 @@ export class LoginPage implements OnInit {
 
   public doLogin(): void {
     if (this.loginForm.invalid) { return; }
-    console.log('Login controle: ', this.loginForm.value);
     this.authService.login(this.loginForm.value).subscribe((user: any) => {
       this.router.navigate([this.redirect[user.user_type_id]]);
     }, e => console.log('Error login: ', e));
