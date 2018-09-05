@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Platform, MenuController  } from '@ionic/angular';
+import { Slides } from '@ionic/angular';
 
 // Models
 import { Skill } from '../../models/skill';
@@ -11,18 +12,22 @@ import { ProgressionDetails } from '../../models/progression-details';
 // Services
 import { AuthService } from '../../service/auth/auth.service';
 import { ApiService } from '../../service/api/api.service';
-
+import { environment } from './../../../environments/environment.prod';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
+
+  @ViewChild(Slides) slides: Slides;
   public student: Student;
   public modules: ModuleFormation[] = [];
   public moduleSelected: ModuleFormation;
+  public formation: any;
+  public environment = environment;
 
-  constructor(private platform: Platform, private authService: AuthService, private apiService: ApiService) { }
+  constructor(private platform: Platform, private authService: AuthService, private apiService: ApiService, public menuCtrl: MenuController) { }
 
   ngOnInit() {
     this.platform.ready().then(() => this.setStudent());
@@ -37,6 +42,12 @@ export class DashboardPage implements OnInit {
   }
 
   private setModules(): void {
+    this.apiService.get('studentsFormation').then((data: any) => {
+      for (let i = 0; i < data.length; i++ ){
+        this.formation = data[i];
+      }
+      console.log('formation: ', this.formation);
+    });
     this.apiService.get( 'getFormations').then((resp: any) => {
       this.modules = [];
       let currentModule: ModuleFormation;
@@ -60,5 +71,32 @@ export class DashboardPage implements OnInit {
     this.apiService.put('progression/updateStudentValidation', { progression_id: progressionId, student_validation: validation })
     .then(resp => console.log('update validation: ', resp))
     .catch(e => console.log('Error updating validation: ', e));
+  }
+
+  public filterByModule(moduleId) {
+    this.moduleSelected = this.modules[
+      this.modules.findIndex((module, index, tab) => { 
+        for(let i; i < this.modules.length; i++) {
+          return module['id'] == moduleId;
+        } 
+        console.log('allSkills: ', this.modules);
+      })
+    ];
+  } 
+
+  public goToSlide() {
+    this.slides.slideTo(1);
+  }
+
+  public slideNext(){
+    this.slides.slideNext();
+  }
+
+  public slidePrev(){
+    this.slides.slidePrev();
+  }
+
+  public openMenu() {
+    this.menuCtrl.open();
   }
 }

@@ -18,6 +18,8 @@ import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 
 // Components
 import { MenuComponent } from './layout/menu/menu.component';
+import {RoundProgressModule} from 'angular-svg-round-progressbar';
+
 
 @NgModule({
   declarations: [AppComponent, MenuComponent],
@@ -26,7 +28,8 @@ import { MenuComponent } from './layout/menu/menu.component';
     HttpClientModule,
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    RoundProgressModule
   ],
   providers: [
     FileTransfer,
