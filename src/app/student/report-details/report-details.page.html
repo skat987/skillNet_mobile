@@ -11,14 +11,25 @@
     <h3>Rédigé par: {{ report.author.fullName }}</h3>
     <h3>Note: {{ report.rate }}</h3>
     <h4>Texte: </h4>
-    <p>{{ report.text }}</p>
+    <p>{{ report.text }}</p>        
+  
+    <form [formGroup]="newCommentForm" (ngSubmit)="createComment(report.id)">
+      <div>
+        <ion-label>Nouveau commentaire: </ion-label>
+        <ion-textarea formControlName="text" required type="textarea"></ion-textarea>
+      </div>
+      <ion-button shape="round" color="primary" fill="outline" type="submit">
+        Ajouter
+      </ion-button>
+    </form>
+
     <ion-list *ngIf="report.comments.length">
       <ion-list-header>
         Commentaires du rapport: {{ report.comments.length }}
       </ion-list-header>
-
       <ion-item *ngFor="let comment of report.comments">
-        {{ comment.author.fullName }} / {{ comment.createdAt }}
+        <h4>{{ comment.author.fullName }} / {{ comment.createdAt }}</h4>
+        <p>{{ comment.text }}</p>
       </ion-item>
     </ion-list>
   </div>

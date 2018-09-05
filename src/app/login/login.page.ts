@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Service
 import { AuthService } from './../service/auth/auth.service';
@@ -11,9 +12,9 @@ import { AuthService } from './../service/auth/auth.service';
 })
 export class LoginPage implements OnInit {
   private redirect = [null, '/admin', '/teacher/formations', '/student/dashboard'];
-  public loginData = { email: '', password: '' };
+  public loginForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     if (this.authService.isLogged()) {
@@ -21,10 +22,17 @@ export class LoginPage implements OnInit {
         this.router.navigate([this.redirect[user.user_type_id]]);
       }).catch(e => console.log('Error storage user: ', e));
     }
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
+  get f() { return this.loginForm.controls; }
+
   public doLogin(): void {
-    this.authService.login(this.loginData).subscribe((user: any) => {
+    if (this.loginForm.invalid) { return; }
+    this.authService.login(this.loginForm.value).subscribe((user: any) => {
       this.router.navigate([this.redirect[user.user_type_id]]);
     }, e => console.log('Error login: ', e));
   }
