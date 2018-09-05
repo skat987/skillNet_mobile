@@ -8,10 +8,10 @@
   <div *ngIf="teacher">
     <ion-card>
       <ion-img src="{{ teacher.avatar }}"></ion-img>
-    
+
       <ion-card-content>
         <ion-card-title>{{ teacher.fullName }}</ion-card-title>
-    
+
         <p>Votre adresse électronique: {{ teacher.email }}</p>
         <p>Votre date de naissance: {{ teacher.birthDate }}</p>
       </ion-card-content>
@@ -20,7 +20,7 @@
     <div *ngIf="teacher.formations.length">
       <ion-card *ngFor="let formation of teacher.formations">
         <ion-img src="{{ formation.logo }}"></ion-img>
-      
+
         <ion-card-content>
           <ion-card-title>{{ formation.name }}</ion-card-title>
           <ion-list *ngIf="formation.modules.length">

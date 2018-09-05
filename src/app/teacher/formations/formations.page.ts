@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Slides } from '@ionic/angular';
 
 // Models
 import { Student } from '../../models/student';
@@ -12,14 +13,37 @@ import { ProgressionTotal } from '../../models/progression-total';
 // Services
 import { AuthService } from '../../service/auth/auth.service';
 import { ApiService } from '../../service/api/api.service';
+import { environment } from '../../../environments/environment';
+
 
 @Component({
   selector: 'app-formations',
   templateUrl: './formations.page.html',
   styleUrls: ['./formations.page.scss'],
 })
+
 export class FormationsPage implements OnInit {
+
+  @ViewChild(Slides) slides: Slides;
   public teacher: Teacher;
+  environment = environment;
+  public student: Student = new Student();
+  public modules: ModuleFormation[] = [];
+  public moduleSkills: any;
+  public moduleSelected = 0;
+  public allSkills = [];
+  public skills = [];
+  public lastname: any;
+  public firstname: any;
+  public avatar: any;
+  public selectedSkills: number[] = [0];
+  public totalSkills = 0;
+  public totalStudentValidation = 0;
+  public totalTeacherValidation = 0;
+  public me: any;
+  public dataFormation: any;
+  public formation: any;
+  public formationId: any;
 
   constructor(private apiService: ApiService, private platform: Platform, private authService: AuthService, private router: Router) { }
 
@@ -32,7 +56,7 @@ export class FormationsPage implements OnInit {
       // tslint:disable-next-line:max-line-length
       this.teacher = new Teacher(null, user.lastname, user.firstname, user.avatar, user.email, user.gender, user.birthday_date, user.phone_number, user.token);
     }).then(() => this.setFormations())
-    .catch(e => console.log('Error setting Teacher: ', e));
+      .catch(e => console.log('Error setting Teacher: ', e));
   }
 
   private setFormations(): void {
@@ -45,7 +69,7 @@ export class FormationsPage implements OnInit {
         }
       }
     }).then(() => this.setStudents())
-    .catch(e => console.log('Error setting formations list: ', e));
+      .catch(e => console.log('Error setting formations list: ', e));
   }
 
   private setStudents(): void {
@@ -62,4 +86,47 @@ export class FormationsPage implements OnInit {
   public showStudentDashBoard(studentId: any, formationId: any): void {
     this.router.navigate(['/teacher/student-dashboard', { student: studentId, formation: formationId }]);
   }
+
+  public filterByModule(moduleId) {
+    this.moduleSkills = this.modules[
+      this.modules.findIndex((module, index, tab) => {
+        for (let i; i < this.modules.length; i++) {
+          return module['id'] === moduleId;
+        }
+        console.log('allSkills: ', this.modules);
+      })
+    ];
+
+  }
+  public showSkills(moduleId: any): void {
+
+    this.moduleSkills = this.modules[
+      this.modules.findIndex((module, index, tab) => {
+        return module['id'] === moduleId;
+      }
+      )
+    ];
+  }
+
+  goToSlide() {
+    this.slides.slideTo(1);
+  }
+
+  slideChanged() {
+    const currentIndex = this.slides.getActiveIndex();
+    console.log('Current index is', currentIndex);
+    const reroll = this.slides.isEnd();
+    if (reroll) {
+      this.slides.scrollbar = true;
+    }
+  }
+
+  slideNext() {
+    this.slides.slideNext();
+  }
+
+  slidePrev() {
+    this.slides.slidePrev();
+  }
+
 }
