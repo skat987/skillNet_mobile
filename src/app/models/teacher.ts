@@ -22,7 +22,7 @@ export class Teacher extends User {
         this.birthDate = birthDate;
         this.phone = phone;
         this.token = token;
-        this.user_type_id = 2;
+        this.userTypeId = 2;
     }
 
     public addFormation(formation: Formation): void {

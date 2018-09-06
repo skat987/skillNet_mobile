@@ -11,19 +11,42 @@
     <ion-card-content>
       <ion-card-title>{{ student.fullName }}</ion-card-title>
   
-      <ion-list *ngIf="modules.length">
+      <ion-list *ngIf="student.formations.length">
         <ion-list-header>
-          Module de l'étudiant
+          Formations de l'étudiant: 
         </ion-list-header>
-        <ion-item *ngFor="let module of modules" (click)="ShowModule(module)">
-          <ion-icon name="arrow-forward" item-end></ion-icon>
-          <ion-label>
-            {{ module.name }}
-          </ion-label>
+
+        <ion-item>
+          <ion-label>Sélectionner une formation</ion-label>
+          <ion-select #formationSelect (ionChange)="showFormation(formationSelect.value)">
+            <ion-select-option *ngFor="let formation of student.formations" value="{{ formation.id }}">{{ formation.name }}</ion-select-option>
+          </ion-select>
         </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
+
+  <ion-card *ngIf="formationSelected">
+    <ion-img src="{{ formationSelected.logo }}"></ion-img>
+  
+    <ion-card-content>
+      <ion-card-title>{{ formationSelected.name }}</ion-card-title>
+  
+      <ion-list *ngIf="formationSelected.modules.length">
+        <ion-list-header>
+          Modules de l'étudiant: 
+        </ion-list-header>
+
+        <ion-item>
+          <ion-label>Sélectionner un module</ion-label>
+          <ion-select #moduleSelect (ionChange)="ShowModule(moduleSelect.value)">
+            <ion-select-option *ngFor="let module of formationSelected.modules" value="{{ module }}">{{ module.name }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
   <div *ngIf="moduleSelected">
     <h3>Module: {{ moduleSelected.name }}</h3>
     <h6>Compétences: {{ moduleSelected.progression.skillsCount }}</h6>
