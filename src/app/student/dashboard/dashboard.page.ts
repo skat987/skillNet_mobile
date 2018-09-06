@@ -43,41 +43,29 @@ export class DashboardPage implements OnInit {
         // tslint:disable-next-line:max-line-length
         this.student.addFormation(new Formation(resp[i].id, resp[i].name, resp[i].logo, resp[i].start_at, resp[i].end_at, resp[i].created_at, resp[i].updated_at, resp[i].total_students, resp[i].total_teachers, resp[i].total_modules, resp[i].total_skills));
       }
-    }).then(() => this.showFormation())
+    }).then(() => this.setModules())
     .catch(e => console.log('Error setting formations: ', e));
   }
 
-  public showFormation(formationId?: any): void {
-    console.log('showFormation controle: ', formationId);
-    if (!formationId) {
-      this.setFormationSelected().then((resp: Formation) => this.setModules(resp.id))
-      .catch(e => console.log('Error setting formation selected: ', e));
-    } else {
-      this.setFormationSelected(formationId).then((resp: Formation) => this.setModules(resp.id))
-      .catch(e => console.log('Error setting formation selected: ', e));
+  private setModules(): void {
+    for (let i = 0; i < this.student.formations.length; i++) {
+      this.apiService.get('getFormationForAdmin/' + this.student.formations[i].id).then((resp: any) => {
+        let currentModule: ModuleFormation;
+        for (let j = 0; j < resp.length; j++) {
+          // tslint:disable-next-line:max-line-length
+          currentModule = new ModuleFormation(resp[j].module.id, resp[j].module.name, new ProgressionTotal(resp[j].module.totalSkills, resp[j].module.progression.student, resp[j].module.progression.teacher));
+          for (let k = 0; k < resp[j].module.skills.length; k++) {
+            // tslint:disable-next-line:max-line-length
+            currentModule.addSkill(new Skill(resp[j].module.skills[k].id, resp[j].module.skills[k].name, new ProgressionDetails(resp[j].module.skills[k].progression.student_progression_id, resp[j].module.skills[k].progression.student_validation, resp[j].module.skills[k].progression.student_validation_date, resp[j].module.skills[k].progression.teacher_validation, resp[j].module.skills[k].progression.teacher_validation_date)));
+          }
+          this.student.formations[i].addModule(currentModule);
+        }
+      }).catch(e => console.log('Error setting modules: ', e));
     }
   }
 
-  private setFormationSelected(formationId?: any): Promise<Formation> {
-    return new Promise(resolve => {
-      // tslint:disable-next-line:max-line-length
-      resolve(this.formationSelected = (!formationId) ? this.student.getFormationById(this.student.currentFormationId) : this.student.getFormationById(formationId));
-    });
-  }
-
-  private setModules(formationId: any): void {
-    this.apiService.get('getFormationForAdmin/' + formationId).then((resp: any) => {
-      let currentModule: ModuleFormation;
-      for (let i = 0; i < resp.length; i++) {
-        // tslint:disable-next-line:max-line-length
-        currentModule = new ModuleFormation(resp[i].module.id, resp[i].module.name, new ProgressionTotal(resp[i].module.totalSkills, resp[i].module.progression.student, resp[i].module.progression.teacher));
-        for (let j = 0; j < resp[i].module.skills.length; j++) {
-          // tslint:disable-next-line:max-line-length
-          currentModule.addSkill(new Skill(resp[i].module.skills[j].id, resp[i].module.skills[j].name, new ProgressionDetails(resp[i].module.skills[j].progression.student_progression_id, resp[i].module.skills[j].progression.student_validation, resp[i].module.skills[j].progression.student_validation_date, resp[i].module.skills[j].progression.teacher_validation, resp[i].module.skills[j].progression.teacher_validation_date)));
-        }
-        this.formationSelected.addModule(currentModule);
-      }
-    }).catch(e => console.log('Error setting modules: ', e));
+  public showFormation(formation: Formation): void {
+    this.formationSelected = formation;
   }
 
   public ShowModule(module: ModuleFormation): void {

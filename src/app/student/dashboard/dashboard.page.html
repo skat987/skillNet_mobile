@@ -19,7 +19,7 @@
         <ion-item>
           <ion-label>Sélectionner une formation</ion-label>
           <ion-select #formationSelect (ionChange)="showFormation(formationSelect.value)">
-            <ion-select-option *ngFor="let formation of student.formations" value="{{ formation.id }}">{{ formation.name }}</ion-select-option>
+            <ion-select-option *ngFor="let formation of student.formations" [value]="formation">{{ formation.name }}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-list>
@@ -40,7 +40,7 @@
         <ion-item>
           <ion-label>Sélectionner un module</ion-label>
           <ion-select #moduleSelect (ionChange)="ShowModule(moduleSelect.value)">
-            <ion-select-option *ngFor="let module of formationSelected.modules" value="{{ module }}">{{ module.name }}</ion-select-option>
+            <ion-select-option *ngFor="let module of formationSelected.modules" [value]="module">{{ module.name }}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-list>
