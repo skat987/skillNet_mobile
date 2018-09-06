@@ -66,7 +66,7 @@ var DashboardPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-toggle>\r\n        <ion-button>\r\n          <ion-icon slot=\"icon-only\" name=\"menu\"></ion-icon>\r\n        </ion-button>\r\n      </ion-menu-toggle>\r\n    </ion-buttons>\r\n    <ion-title text-center>Accueil</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button>\r\n        <ion-icon slot=\"icon-only\" name=\"arrow-dropdown\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-grid>\r\n    <!-- <ion-row>\r\n      <ion-col size=\"4\">\r\n        <div>\r\n            <img src=\"{{ environment.appImageUrl }}{{ formation.logo }}\">\r\n        </div>\r\n      </ion-col>\r\n      <ion-col size=\"\">\r\n        <div>\r\n          <h6>{{ formation.name }}</h6>\r\n        </div>\r\n        <div>\r\n          <h6>{{ formation.start_at | date: \"dd/MM/yyyy\" }} - {{ formation.end_at | date: \"dd/MM/yyyy\" }} </h6>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row> -->\r\n    <ion-row>\r\n      <ion-col size=\"8\">\r\n        <div>\r\n          <ion-icon name=\"square\" class=\"purple\"></ion-icon>&nbsp;Etudiant\r\n        </div>\r\n      </ion-col>\r\n    \r\n      <ion-col size=\"4\">\r\n        <div>\r\n          <ion-icon name=\"square\" class=\"red\"></ion-icon>&nbsp;Formateurs\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n  <h2 text-center>Modules</h2>\r\n  <ion-slides *ngIf=\"modules.length\">\r\n    <ion-slide class=\"roundProgressBarWrapper slideImportant\" *ngFor=\"let module of modules\" (click)=\"ShowModule(module)\">\r\n      <ion-label class=\"moduleName\">{{ module.name }}</ion-label>\r\n      <round-progress class=\"roundProgressBarTeacher\" [current]=\"module.progression.teacherValidations * 100/module.progression.skillsCount\"\r\n        [radius]=\"45\" [color]=\"environment.progressColorTeacher\" [max]=\"environment.progressMax\" [stroke]=\"environment.progressStrokeTeacher\"></round-progress>\r\n\r\n      <round-progress class=\"roundProgressBarStudent\" [current]=\"module.progression.studentValidations * 100/module.progression.skillsCount\"\r\n        [radius]=\"45\" [color]=\"environment.progressColorStudent\" [max]=\"environment.progressMax\" [stroke]=\"environment.progressStrokeStudent\"></round-progress>\r\n\r\n      <div class=\"progressTeacherText red\">{{ (module.progression.teacherValidations * 100/module.progression.skillsCount) | number: '1.0-0' }}%</div>\r\n      <div class=\"progressStudentText purple\">{{ (module.progression.studentValidations * 100/module.progression.skillsCount) | number: '1.0-0' }}%</div>\r\n    </ion-slide>\r\n  </ion-slides>\r\n\r\n  <div class=\"swiper-button-next\" (click)=\"slideNext()\"></div>\r\n  <div class=\"swiper-button-prev\" (click)=\"slidePrev()\"></div>\r\n\r\n  <h2 text-center>Compétences</h2>\r\n  \r\n  <div *ngIf=\"moduleSelected\">\r\n    <ion-list *ngIf=\"moduleSelected.skills.length\">   \r\n      <ion-card *ngFor=\"let skill of moduleSelected.skills\" class=\"cardShadows\">\r\n        \r\n        <h4 text-center>{{ moduleSelected.name }}</h4>\r\n        <ion-item>\r\n          <ion-label text-wrap>{{ skill.name }}</ion-label>          \r\n        </ion-item>\r\n        <ion-item>\r\n          <ion-label>Validation de l'étudiant</ion-label>\r\n          <ion-checkbox color=\"student\" [(ngModel)]=\"skill.progression.studentValue\" (ionChange)=\"updateValidation(skill.progression.id, skill.progression.studentValue)\"></ion-checkbox>\r\n        </ion-item>\r\n        <ion-item>\r\n          <ion-label>Validation du formateur</ion-label>          \r\n          <ion-checkbox color=\"teacher\" [(ngModel)]=\"skill.progression.teacherValue\" disabled=\"true\"></ion-checkbox>\r\n        </ion-item>\r\n      </ion-card>\r\n    </ion-list>\r\n    <h6>Total de compétences: {{ moduleSelected.progression.skillsCount }}</h6>\r\n    <h6 text-left>Validé par formateur: {{ moduleSelected.progression.teacherValidations }} - Validé par étudiant: {{ moduleSelected.progression.studentValidations }}</h6>\r\n  </div>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-toggle>\r\n        <ion-button>\r\n          <ion-icon slot=\"icon-only\" name=\"menu\"></ion-icon>\r\n        </ion-button>\r\n      </ion-menu-toggle>\r\n    </ion-buttons>\r\n    <ion-title text-center>Accueil</ion-title>\r\n    <div slot=\"end\">\r\n      <!-- <ion-label>Sélectionner une formation</ion-label> -->\r\n      <ion-select #formationSelect (ionChange)=\"showFormation(formationSelect.value)\" slot=\"end\"> \r\n        <ion-select-option *ngFor=\"let formation of student.formations\" [value]=\"formation\">{{ formation.name }}</ion-select-option>\r\n      </ion-select>\r\n    </div>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n<ion-grid>\r\n     <ion-row justify-content-start>\r\n      <ion-col size=\"4\">\r\n        <div>\r\n            <img src=\"{{ environment.appImageUrl }}{{ formation.logo }}\">\r\n        </div>\r\n      </ion-col>\r\n      <!-- <ion-col size=\"4\">\r\n        <div>\r\n          <h6>{{ formation.name }}</h6>\r\n        </div>\r\n        <div>\r\n          <h6>{{ formation.start_at | date: \"dd/MM/yyyy\" }} - {{ formation.end_at | date: \"dd/MM/yyyy\" }} </h6>\r\n        </div>\r\n      </ion-col> -->\r\n    </ion-row>\r\n    <!-- <ion-row>\r\n      <ion-col size=\"4\" offset=\"4\">\r\n        <div>\r\n          <ion-icon name=\"square\" class=\"purple\"></ion-icon>&nbsp;Etudiant\r\n        </div>\r\n      </ion-col>\r\n    \r\n      <ion-col size=\"4\">\r\n        <div>\r\n          <ion-icon name=\"square\" class=\"red\"></ion-icon>&nbsp;Formateurs\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>-->\r\n  </ion-grid>\r\n  <h2 text-uppercase text-center>Modules</h2>\r\n  <ion-slides *ngIf=\"formationSelected.modules.length\">\r\n    <ion-slide class=\"roundProgressBarWrapper slideImportant\" *ngFor=\"let module of formationSelected.modules\" (click)=\"showModule(module)\">\r\n      <ion-label class=\"moduleName\">{{ module.name }}</ion-label>\r\n      <round-progress class=\"roundProgressBarTeacher\" [current]=\"module.progression.teacherValidations * 100/module.progression.skillsCount\"\r\n        [radius]=\"45\" [color]=\"environment.progressColorTeacher\" [max]=\"environment.progressMax\" [stroke]=\"environment.progressStrokeTeacher\"></round-progress>\r\n\r\n      <round-progress class=\"roundProgressBarStudent\" [current]=\"module.progression.studentValidations * 100/module.progression.skillsCount\"\r\n        [radius]=\"45\" [color]=\"environment.progressColorStudent\" [max]=\"environment.progressMax\" [stroke]=\"environment.progressStrokeStudent\"></round-progress>\r\n\r\n      <div class=\"progressTeacherText red\">{{ (module.progression.teacherValidations * 100/module.progression.skillsCount) | number: '1.0-0' }}%</div>\r\n      <div class=\"progressStudentText purple\">{{ (module.progression.studentValidations * 100/module.progression.skillsCount) | number: '1.0-0' }}%</div>\r\n    </ion-slide>\r\n  </ion-slides>\r\n\r\n  <div class=\"swiper-button-next\" (click)=\"slideNext()\"></div>\r\n  <div class=\"swiper-button-prev\" (click)=\"slidePrev()\"></div>\r\n\r\n  <ion-grid>\r\n    <ion-row justify-content-start>\r\n      <ion-col size=\"4\">\r\n        <ion-icon name=\"square\" class=\"purple\"></ion-icon>&nbsp;Etudiant\r\n      </ion-col>\r\n    \r\n      <ion-col size=\"4\">\r\n        <ion-icon name=\"square\" class=\"red\"></ion-icon>&nbsp;Formateurs\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n\r\n  <h2 text-uppercase text-center>Compétences</h2>\r\n  <div *ngIf=\"!moduleSelected\">\r\n    <ion-list *ngFor=\"let module of formationSelected.modules \">\r\n      <ion-card *ngFor=\"let skill of module.skills\" class=\"cardShadows\">\r\n        <h4 text-center>{{ module.name }}</h4>\r\n        <ion-item>\r\n          <ion-label text-wrap>{{ skill.name }}</ion-label>          \r\n        </ion-item>\r\n        <ion-item>\r\n          <ion-label>Validation de l'étudiant</ion-label>\r\n          <ion-checkbox color=\"student\" [(ngModel)]=\"skill.progression.studentValue\" (ionChange)=\"updateValidation(skill.progression.id, skill.progression.studentValue)\"></ion-checkbox>\r\n        </ion-item>\r\n        <ion-item>\r\n          <ion-label>Validation du formateur</ion-label>          \r\n          <ion-checkbox color=\"teacher\" [(ngModel)]=\"skill.progression.teacherValue\" disabled=\"true\"></ion-checkbox>\r\n        </ion-item>\r\n      </ion-card>\r\n    </ion-list>\r\n  </div>\r\n  <div *ngIf=\"moduleSelected\">\r\n    <ion-list *ngIf=\"moduleSelected.skills.length\">   \r\n      <ion-card *ngFor=\"let skill of moduleSelected.skills\" class=\"cardShadows\">\r\n        \r\n        <h4 text-center>{{ moduleSelected.name }}</h4>\r\n        <ion-item>\r\n          <ion-label text-wrap>{{ skill.name }}</ion-label>          \r\n        </ion-item>\r\n        <ion-item>\r\n          <ion-label>Validation de l'étudiant</ion-label>\r\n          <ion-checkbox color=\"student\" [(ngModel)]=\"skill.progression.studentValue\" (ionChange)=\"updateValidation(skill.progression.id, skill.progression.studentValue)\"></ion-checkbox>\r\n        </ion-item>\r\n        <ion-item>\r\n          <ion-label>Validation du formateur</ion-label>          \r\n          <ion-checkbox color=\"teacher\" [(ngModel)]=\"skill.progression.teacherValue\" disabled=\"true\"></ion-checkbox>\r\n        </ion-item>\r\n      </ion-card>\r\n    </ion-list>\r\n    <h6>Total de compétences: {{ moduleSelected.progression.skillsCount }}</h6>\r\n    <h6 text-left>Validé par formateur: {{ moduleSelected.progression.teacherValidations }} - Validé par étudiant: {{ moduleSelected.progression.studentValidations }}</h6>\r\n  </div>\r\n</ion-content>"
 
 /***/ }),
 
@@ -95,12 +95,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/index.js");
 /* harmony import */ var _models_skill__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../models/skill */ "./src/app/models/skill.ts");
 /* harmony import */ var _models_student__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../models/student */ "./src/app/models/student.ts");
-/* harmony import */ var _models_module_formation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../models/module-formation */ "./src/app/models/module-formation.ts");
-/* harmony import */ var _models_progression_total__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../models/progression-total */ "./src/app/models/progression-total.ts");
-/* harmony import */ var _models_progression_details__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../models/progression-details */ "./src/app/models/progression-details.ts");
-/* harmony import */ var _service_auth_auth_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../service/auth/auth.service */ "./src/app/service/auth/auth.service.ts");
-/* harmony import */ var _service_api_api_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../service/api/api.service */ "./src/app/service/api/api.service.ts");
-/* harmony import */ var _environments_environment_prod__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./../../../environments/environment.prod */ "./src/environments/environment.prod.ts");
+/* harmony import */ var _models_formation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../models/formation */ "./src/app/models/formation.ts");
+/* harmony import */ var _models_module_formation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../models/module-formation */ "./src/app/models/module-formation.ts");
+/* harmony import */ var _models_progression_total__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../models/progression-total */ "./src/app/models/progression-total.ts");
+/* harmony import */ var _models_progression_details__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../models/progression-details */ "./src/app/models/progression-details.ts");
+/* harmony import */ var _service_auth_auth_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../service/auth/auth.service */ "./src/app/service/auth/auth.service.ts");
+/* harmony import */ var _service_api_api_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../service/api/api.service */ "./src/app/service/api/api.service.ts");
+/* harmony import */ var _environments_environment_prod__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./../../../environments/environment.prod */ "./src/environments/environment.prod.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -119,6 +120,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 // Services
 
 
@@ -130,8 +132,7 @@ var DashboardPage = /** @class */ (function () {
         this.authService = authService;
         this.apiService = apiService;
         this.menuCtrl = menuCtrl;
-        this.modules = [];
-        this.environment = _environments_environment_prod__WEBPACK_IMPORTED_MODULE_9__["environment"];
+        this.environment = _environments_environment_prod__WEBPACK_IMPORTED_MODULE_10__["environment"];
     }
     DashboardPage.prototype.ngOnInit = function () {
         var _this = this;
@@ -142,32 +143,52 @@ var DashboardPage = /** @class */ (function () {
         this.authService.getAuth().then(function (user) {
             // tslint:disable-next-line:max-line-length
             _this.student = new _models_student__WEBPACK_IMPORTED_MODULE_3__["Student"](null, user.lastname, user.firstname, user.avatar, user.email, user.gender, user.birthday_date, user.phone_number, user.token, user.student_id, user.formation_id);
-        }).then(function () { return _this.setModules(); })
+        }).then(function () { return _this.setFormations(); })
             .catch(function (e) { return console.log('Error setting student: ', e); });
     };
-    DashboardPage.prototype.setModules = function () {
+    DashboardPage.prototype.setFormations = function () {
         var _this = this;
-        this.apiService.get('studentsFormation').then(function (data) {
-            for (var i = 0; i < data.length; i++) {
-                _this.formation = data[i];
+        this.apiService.get('studentsFormation').then(function (resp) {
+            for (var i = 0; i < resp.length; i++) {
+                // tslint:disable-next-line:max-line-length
+                _this.student.addFormation(new _models_formation__WEBPACK_IMPORTED_MODULE_4__["Formation"](resp[i].id, resp[i].name, resp[i].logo, resp[i].start_at, resp[i].end_at, resp[i].created_at, resp[i].updated_at, resp[i].total_students, resp[i].total_teachers, resp[i].total_modules, resp[i].total_skills));
             }
-            console.log('formation: ', _this.formation);
-        });
-        this.apiService.get('getFormations').then(function (resp) {
-            _this.modules = [];
+        }).then(function () { return _this.showFormation(); })
+            .catch(function (e) { return console.log('Error setting formations: ', e); });
+    };
+    DashboardPage.prototype.setModules = function (formationId) {
+        var _this = this;
+        this.apiService.get('getFormationForAdmin/' + formationId).then(function (resp) {
             var currentModule;
             for (var i = 0; i < resp.length; i++) {
                 // tslint:disable-next-line:max-line-length
-                currentModule = new _models_module_formation__WEBPACK_IMPORTED_MODULE_4__["ModuleFormation"](resp[i].module.id, resp[i].module.name, new _models_progression_total__WEBPACK_IMPORTED_MODULE_5__["ProgressionTotal"](resp[i].module.totalSkills, resp[i].module.progression.student, resp[i].module.progression.teacher));
+                currentModule = new _models_module_formation__WEBPACK_IMPORTED_MODULE_5__["ModuleFormation"](resp[i].module.id, resp[i].module.name, new _models_progression_total__WEBPACK_IMPORTED_MODULE_6__["ProgressionTotal"](resp[i].module.totalSkills, resp[i].module.progression.student, resp[i].module.progression.teacher));
                 for (var j = 0; j < resp[i].module.skills.length; j++) {
                     // tslint:disable-next-line:max-line-length
-                    currentModule.addSkill(new _models_skill__WEBPACK_IMPORTED_MODULE_2__["Skill"](resp[i].module.skills[j].id, resp[i].module.skills[j].name, new _models_progression_details__WEBPACK_IMPORTED_MODULE_6__["ProgressionDetails"](resp[i].module.skills[j].progression.student_progression_id, resp[i].module.skills[j].progression.student_validation, resp[i].module.skills[j].progression.student_validation_date, resp[i].module.skills[j].progression.teacher_validation, resp[i].module.skills[j].progression.teacher_validation_date)));
+                    currentModule.addSkill(new _models_skill__WEBPACK_IMPORTED_MODULE_2__["Skill"](resp[i].module.skills[j].id, resp[i].module.skills[j].name, new _models_progression_details__WEBPACK_IMPORTED_MODULE_7__["ProgressionDetails"](resp[i].module.skills[j].progression.student_progression_id, resp[i].module.skills[j].progression.student_validation, resp[i].module.skills[j].progression.student_validation_date, resp[i].module.skills[j].progression.teacher_validation, resp[i].module.skills[j].progression.teacher_validation_date)));
                 }
-                _this.modules.push(currentModule);
+                _this.formationSelected.addModule(currentModule);
             }
         }).catch(function (e) { return console.log('Error setting modules: ', e); });
     };
-    DashboardPage.prototype.ShowModule = function (module) {
+    DashboardPage.prototype.showFormation = function (formation) {
+        var _this = this;
+        if (!formation) {
+            this.setFormationSelected().then(function (resp) { return _this.setModules(resp.id); })
+                .catch(function (e) { return console.log('Error setting Formation selected: ', e); });
+        }
+        else {
+            this.setFormationSelected(formation).then(function (resp) { return _this.setModules(resp.id); })
+                .catch(function (e) { return console.log('Error setting formation selected: ', e); });
+        }
+    };
+    DashboardPage.prototype.setFormationSelected = function (formation) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            resolve(_this.formationSelected = (!formation) ? _this.student.getFormationById(_this.student.currentFormationId) : formation);
+        });
+    };
+    DashboardPage.prototype.showModule = function (module) {
         this.moduleSelected = module;
     };
     DashboardPage.prototype.updateValidation = function (progressionId, validation) {
@@ -177,11 +198,11 @@ var DashboardPage = /** @class */ (function () {
     };
     DashboardPage.prototype.filterByModule = function (moduleId) {
         var _this = this;
-        this.moduleSelected = this.modules[this.modules.findIndex(function (module, index, tab) {
-            for (var i = void 0; i < _this.modules.length; i++) {
+        this.moduleSelected = this.formationSelected.modules[this.formationSelected.modules.findIndex(function (module, index, tab) {
+            for (var i = void 0; i < _this.formationSelected.modules.length; i++) {
                 return module['id'] === moduleId;
             }
-            console.log('allSkills: ', _this.modules);
+            console.log('allSkills: ', _this.formationSelected.modules);
         })];
     };
     DashboardPage.prototype.goToSlide = function () {
@@ -211,7 +232,7 @@ var DashboardPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./dashboard.page.html */ "./src/app/student/dashboard/dashboard.page.html"),
             styles: [__webpack_require__(/*! ./dashboard.page.scss */ "./src/app/student/dashboard/dashboard.page.scss")],
         }),
-        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Platform"], _service_auth_auth_service__WEBPACK_IMPORTED_MODULE_7__["AuthService"], _service_api_api_service__WEBPACK_IMPORTED_MODULE_8__["ApiService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["MenuController"]])
+        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Platform"], _service_auth_auth_service__WEBPACK_IMPORTED_MODULE_8__["AuthService"], _service_api_api_service__WEBPACK_IMPORTED_MODULE_9__["ApiService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["MenuController"]])
     ], DashboardPage);
     return DashboardPage;
 }());

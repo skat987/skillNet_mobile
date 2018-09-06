@@ -301,7 +301,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var _APP_LOGO_URL = _environments_environment__WEBPACK_IMPORTED_MODULE_0__["environment"].appLogoUrl;
 var Formation = /** @class */ (function () {
-    function Formation(id, name, logo, startAt, endAt, studentCount) {
+    // tslint:disable-next-line:max-line-length
+    function Formation(id, name, logo, startAt, endAt, createdAt, updatedAt, studentsCount, teachersCount, modulesCount, skillsCount) {
         this.students = [];
         this.modules = [];
         this.reports = [];
@@ -310,7 +311,12 @@ var Formation = /** @class */ (function () {
         this.logo = _APP_LOGO_URL + logo;
         this.startAt = startAt;
         this.endAt = endAt;
-        this.studentCount = studentCount;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.studentsCount = studentsCount;
+        this.teachersCount = teachersCount;
+        this.modulesCount = modulesCount;
+        this.skillsCount = skillsCount;
     }
     Formation.prototype.addStudent = function (student) {
         this.students.push(student);
@@ -533,8 +539,9 @@ var _APP_IMG_URL = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["envir
 var Student = /** @class */ (function (_super) {
     __extends(Student, _super);
     // tslint:disable-next-line:max-line-length
-    function Student(id, lastName, firstName, avatar, email, gender, birthDate, phone, token, studentId, formationId, progression) {
+    function Student(id, lastName, firstName, avatar, email, gender, birthDate, phone, token, studentId, currentFormationId, progression) {
         var _this = _super.call(this) || this;
+        _this.formations = [];
         _this.id = id;
         _this.lastName = lastName;
         _this.firstName = firstName;
@@ -545,12 +552,18 @@ var Student = /** @class */ (function (_super) {
         _this.birthDate = birthDate;
         _this.phone = phone;
         _this.token = token;
-        _this.user_type_id = 3;
+        _this.userTypeId = 3;
         _this.studentId = studentId;
-        _this.formationId = formationId;
+        _this.currentFormationId = currentFormationId;
         _this.progression = progression;
         return _this;
     }
+    Student.prototype.getFormationById = function (formationId) {
+        return this.formations[this.formations.findIndex(function (formation) { return formation.id === formationId; })];
+    };
+    Student.prototype.addFormation = function (formation) {
+        this.formations.push(formation);
+    };
     return Student;
 }(_user__WEBPACK_IMPORTED_MODULE_0__["User"]));
 
@@ -601,7 +614,7 @@ var Teacher = /** @class */ (function (_super) {
         _this.birthDate = birthDate;
         _this.phone = phone;
         _this.token = token;
-        _this.user_type_id = 2;
+        _this.userTypeId = 2;
         return _this;
     }
     Teacher.prototype.addFormation = function (formation) {

@@ -129,7 +129,7 @@ var ReportsPage = /** @class */ (function () {
             _this.formations = [];
             for (var i = 0; i < resp['data'].length; i++) {
                 // tslint:disable-next-line:max-line-length
-                _this.formations.push(new _models_formation__WEBPACK_IMPORTED_MODULE_3__["Formation"](resp['data'][i].id, resp['data'][i].name, resp['data'][i].logo, resp['data'][i].start_at, resp['data'][i].end_at, resp['data'][i].total_students));
+                _this.formations.push(new _models_formation__WEBPACK_IMPORTED_MODULE_3__["Formation"](resp['data'][i].id, resp['data'][i].name, resp['data'][i].logo, resp['data'][i].start_at, resp['data'][i].end_at, null, null, resp['data'][i].total_students));
             }
         }).then(function () { return _this.setReportsByFormation(); })
             .catch(function (e) { return console.log('Error setting formations: ', e); });

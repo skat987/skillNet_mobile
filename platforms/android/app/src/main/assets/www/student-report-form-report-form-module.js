@@ -63,7 +63,7 @@ var ReportFormPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>report-form</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <form [formGroup]=\"newReportForm\" (ngSubmit)=\"onSubmit()\">\r\n    <div>\r\n      <ion-list>\r\n        <ion-item>\r\n          <ion-label>Titre du rapport: </ion-label>\r\n          <ion-input formControlName=\"title\" required type=\"text\" placeholder=\"Titre\"></ion-input>\r\n        </ion-item>\r\n        <ion-item>\r\n          <ion-label>Date: </ion-label>\r\n          <ion-datetime formControlName=\"date\" required pickerFormat=\"MM/DD/YYYY\"></ion-datetime>\r\n        </ion-item>\r\n        <ion-item>\r\n          <ion-label>Texte: </ion-label>\r\n          <ion-textarea formControlName=\"text\" required placeholder=\"Votre texte\"></ion-textarea>\r\n        </ion-item>\r\n        <ion-item>\r\n          <ion-label>Note: </ion-label>\r\n          <ion-input formControlName=\"rate\" required type=\"number\" placeholder=\"Note\"></ion-input>\r\n        </ion-item>\r\n      </ion-list>\r\n      <ion-button shape=\"round\" color=\"primary\" fill=\"outline\" type=\"submit\">\r\n        Valider\r\n      </ion-button>\r\n    </div>\r\n  </form>\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n    <ion-toolbar>\r\n        <ion-title>report-form</ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n    <form [formGroup]=\"newReportForm\" (ngSubmit)=\"onSubmit()\">\r\n        <div>\r\n            <ion-list>\r\n                <ion-item>\r\n                    <ion-label>Titre du rapport: </ion-label>\r\n                    <ion-input formControlName=\"title\" required type=\"text\" placeholder=\"Titre\"></ion-input>\r\n                </ion-item>\r\n                <ion-item>\r\n                    <ion-label>Date: </ion-label>\r\n                    <ion-datetime formControlName=\"date\" required displayFormat=\"MM/DD/YYYY\" pickerFormat=\"MM/DD/YYYY\"></ion-datetime>\r\n                </ion-item>\r\n                <ion-item>\r\n                    <ion-label>Texte: </ion-label>\r\n                    <ion-textarea formControlName=\"text\" required placeholder=\"Votre texte\"></ion-textarea>\r\n                </ion-item>\r\n                <ion-item>\r\n                    <ion-label>Note: </ion-label>\r\n                    <ion-input formControlName=\"rate\" required type=\"number\" placeholder=\"Note\"></ion-input>\r\n                </ion-item>\r\n            </ion-list>\r\n            <ion-button shape=\"round\" color=\"primary\" fill=\"outline\" type=\"submit\">\r\n                Valider\r\n            </ion-button>\r\n        </div>\r\n    </form>\r\n</ion-content>"
 
 /***/ }),
 
@@ -128,16 +128,17 @@ var ReportFormPage = /** @class */ (function () {
         configurable: true
     });
     ReportFormPage.prototype.onSubmit = function () {
+        console.log('create controle 1: ', this.newReportForm.value);
         if (this.newReportForm.invalid) {
             return;
         }
         var dataReport = {
             title: this.f.title.value,
-            date: new Date(this.f.date.value.year.value, this.f.date.value.month.value, this.f.date.value.day.value).toDateString(),
+            date: new Date(this.f.date.value.year.value, this.f.date.value.month.value, this.f.date.value.day.value).toJSON(),
             text: this.f.text.value,
             rate: this.f.rate.value
         };
-        console.log('create controle: ', dataReport);
+        console.log('create controle 2: ', dataReport);
         this.apiService.post('report/create', dataReport)
             .then(function (resp) { return console.log('create report: ', resp); })
             .catch(function (e) { return console.log('Error creating report: ', e); });
