@@ -39,7 +39,7 @@
 
         <ion-item>
           <ion-label>Sélectionner un module</ion-label>
-          <ion-select #moduleSelect (ionChange)="ShowModule(moduleSelect.value)">
+          <ion-select #moduleSelect (ionChange)="showModule(moduleSelect.value)">
             <ion-select-option *ngFor="let module of formationSelected.modules" [value]="module">{{ module.name }}</ion-select-option>
           </ion-select>
         </ion-item>

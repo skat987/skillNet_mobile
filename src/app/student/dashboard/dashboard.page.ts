@@ -78,7 +78,7 @@ export class DashboardPage implements OnInit {
     });
   }
 
-  public ShowModule(module: ModuleFormation): void {
+  public showModule(module: ModuleFormation): void {
     this.moduleSelected = module;
   }
 
