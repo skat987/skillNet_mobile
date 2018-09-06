@@ -36,13 +36,14 @@ export class PlanningsPage implements OnInit {
 
   public openFile(url: any): void {
     const fileTransfer: FileTransferObject = this.transfer.create();
+    const apiUrl = 'http://skillstracking.motjo.io/uploads/calendars/';
     let path: any;
     if (this.platform.is('ios')) {
       path = this.file.documentsDirectory;
     } else if (this.platform.is('android')) {
       path = this.file.dataDirectory;
     }
-    fileTransfer.download(url, path + url).then(entry => {
+    fileTransfer.download(apiUrl + url, path + url).then(entry => {
       console.log('open file controle: ', entry);
       this.document.viewDocument(entry.toURL(), 'application/pdf', {});
     }).catch(e => console.log('Error opening file: ', e));

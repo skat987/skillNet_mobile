@@ -22,6 +22,7 @@ const routes: Routes = [
       { path: 'student/report-details', loadChildren: './student/report-details/report-details.module#ReportDetailsPageModule' },
       { path: 'student/plannings', loadChildren: './student/plannings/plannings.module#PlanningsPageModule' },
       { path: 'student/report-form', loadChildren: './student/report-form/report-form.module#ReportFormPageModule' },
+      { path: 'student/profil', loadChildren: './student/profil/profil.module#ProfilPageModule' },
 
       // route teacher
       { path: 'teacher/formations', loadChildren: './teacher/formations/formations.module#FormationsPageModule' },
@@ -31,7 +32,8 @@ const routes: Routes = [
       { path: 'teacher/report-details', loadChildren: './teacher/report-details/report-details.module#ReportDetailsPageModule' },
       { path: 'teacher/plannings', loadChildren: './teacher/plannings/plannings.module#PlanningsPageModule' }
     ]
-  }
+  },
+
 ];
 
 @NgModule({
