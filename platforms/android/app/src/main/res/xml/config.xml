@@ -32,7 +32,7 @@
     <name>skill_net_mobile</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.1.220:8100" />
+    <content original-src="index.html" src="http://192.168.1.190:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -40,7 +40,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    <allow-navigation href="http://192.168.1.220:8100" sessionid="d337e541" />
+    <allow-navigation href="http://192.168.1.190:8100" sessionid="758a5024" />
     <allow-intent href="market:*" />
     <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
     <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />

@@ -22,6 +22,10 @@ var map = {
 		"common",
 		"student-plannings-plannings-module"
 	],
+	"./student/profil/profil.module": [
+		"./src/app/student/profil/profil.module.ts",
+		"student-profil-profil-module"
+	],
 	"./student/report-details/report-details.module": [
 		"./src/app/student/report-details/report-details.module.ts",
 		"common",
@@ -126,6 +130,7 @@ var routes = [
             { path: 'student/report-details', loadChildren: './student/report-details/report-details.module#ReportDetailsPageModule' },
             { path: 'student/plannings', loadChildren: './student/plannings/plannings.module#PlanningsPageModule' },
             { path: 'student/report-form', loadChildren: './student/report-form/report-form.module#ReportFormPageModule' },
+            { path: 'student/profil', loadChildren: './student/profil/profil.module#ProfilPageModule' },
             // route teacher
             { path: 'teacher/formations', loadChildren: './teacher/formations/formations.module#FormationsPageModule' },
             // tslint:disable-next-line:max-line-length
@@ -134,7 +139,7 @@ var routes = [
             { path: 'teacher/report-details', loadChildren: './teacher/report-details/report-details.module#ReportDetailsPageModule' },
             { path: 'teacher/plannings', loadChildren: './teacher/plannings/plannings.module#PlanningsPageModule' }
         ]
-    }
+    },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -246,6 +251,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layout_menu_menu_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./layout/menu/menu.component */ "./src/app/layout/menu/menu.component.ts");
 /* harmony import */ var angular_svg_round_progressbar__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! angular-svg-round-progressbar */ "./node_modules/angular-svg-round-progressbar/dist/index.js");
 /* harmony import */ var angular_svg_round_progressbar__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(angular_svg_round_progressbar__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _layout_header_header_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./layout/header/header.component */ "./src/app/layout/header/header.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -269,12 +275,13 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 // Components
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            declarations: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"], _layout_menu_menu_component__WEBPACK_IMPORTED_MODULE_13__["MenuComponent"]],
+            declarations: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"], _layout_menu_menu_component__WEBPACK_IMPORTED_MODULE_13__["MenuComponent"], _layout_header_header_component__WEBPACK_IMPORTED_MODULE_15__["HeaderComponent"]],
             entryComponents: [],
             imports: [
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"],
@@ -296,6 +303,69 @@ var AppModule = /** @class */ (function () {
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/layout/header/header.component.html":
+/*!*****************************************************!*\
+  !*** ./src/app/layout/header/header.component.html ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  header works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/layout/header/header.component.scss":
+/*!*****************************************************!*\
+  !*** ./src/app/layout/header/header.component.scss ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/layout/header/header.component.ts":
+/*!***************************************************!*\
+  !*** ./src/app/layout/header/header.component.ts ***!
+  \***************************************************/
+/*! exports provided: HeaderComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderComponent", function() { return HeaderComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var HeaderComponent = /** @class */ (function () {
+    function HeaderComponent() {
+    }
+    HeaderComponent.prototype.ngOnInit = function () {
+    };
+    HeaderComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-header',
+            template: __webpack_require__(/*! ./header.component.html */ "./src/app/layout/header/header.component.html"),
+            styles: [__webpack_require__(/*! ./header.component.scss */ "./src/app/layout/header/header.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], HeaderComponent);
+    return HeaderComponent;
 }());
 
 
@@ -371,6 +441,7 @@ var MenuComponent = /** @class */ (function () {
                     { title: 'Accueil', url: '/student/dashboard', icon: 'home' },
                     { title: 'Rapports', url: '/student/reports', icon: 'clipboard' },
                     { title: 'Plannings', url: '/student/plannings', icon: 'calendar' },
+                    { title: 'Profil', url: '/student/profil', icon: 'person' }
                 ]
             }
         ];

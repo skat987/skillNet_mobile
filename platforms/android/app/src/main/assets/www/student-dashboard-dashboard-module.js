@@ -66,7 +66,7 @@ var DashboardPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n    <ion-toolbar>\r\n      <ion-buttons left>\r\n        <button ion-button icon-only (click)='openMenu()'>\r\n          <ion-icon name=\"menu\"></ion-icon></button>\r\n      </ion-buttons>\r\n      <ion-title>Accueil</ion-title>\r\n      <!-- <ion-buttons right>\r\n        <button ion-button icon-only>\r\n          <ion-icon name=\"arrow-dropdown\"></ion-icon></button>\r\n      </ion-buttons> -->\r\n    </ion-toolbar>\r\n      <img src=\"{{ environment.appLogoUrl }}{{ formation.logo }}\">\r\n      <h6>{{ formation.name }}</h6>\r\n      <h6>{{ formation.start_at | date: \"dd/MM/yyyy\" }} - {{ formation.end_at| date: \"dd/MM/yyyy\" }} </h6>\r\n  </ion-header>\r\n\r\n<ion-content padding>\r\n  <h2 text-center>Modules</h2>\r\n  <ion-slides *ngIf=\"modules.length\">\r\n    <ion-slide class=\"roundProgressBarWrapper slideImportant\" *ngFor=\"let module of modules\" (click)=\"ShowModule(module)\">\r\n      <div class=\"moduleName\">{{ module.name }}</div>\r\n      <round-progress class=\"roundProgressBarTeacher\" [current]=\"module.progression.teacherValidations * 100/module.progression.skillsCount\"\r\n        [radius]=\"45\" [color]=\"environment.progressColorTeacher\" [max]=\"environment.progressMax\" [stroke]=\"environment.progressStrokeTeacher\"></round-progress>\r\n\r\n      <round-progress class=\"roundProgressBarStudent\" [current]=\"module.progression.studentValidations * 100/module.progression.skillsCount\"\r\n        [radius]=\"45\" [color]=\"environment.progressColorStudent\" [max]=\"environment.progressMax\" [stroke]=\"environment.progressStrokeStudent\"></round-progress>\r\n\r\n      <div class=\"progressTeacherText red\">{{ (module.progression.teacherValidations * 100/module.progression.skillsCount) | number: '1.0-0' }}%</div>\r\n      <div class=\"progressStudentText purple\">{{ (module.progression.studentValidations * 100/module.progression.skillsCount) | number: '1.0-0' }}%</div>\r\n    </ion-slide>\r\n  </ion-slides>\r\n\r\n  <div class=\"swiper-button-next\" (click)=\"slideNext()\"></div>\r\n  <div class=\"swiper-button-prev\" (click)=\"slidePrev()\"></div>\r\n\r\n  <h2 text-center>Compétences</h2>\r\n  \r\n  <div *ngIf=\"moduleSelected\">\r\n    <ion-list *ngIf=\"moduleSelected.skills.length\">   \r\n      <ion-card *ngFor=\"let skill of moduleSelected.skills\" class=\"cardShadows\">\r\n        \r\n        <h4 text-center>{{ moduleSelected.name }}</h4>\r\n        <ion-item>\r\n          <ion-label>Compétences: {{ skill.name }}</ion-label>          \r\n        </ion-item>\r\n        <ion-item>\r\n          <ion-label>Validation de l'étudiant</ion-label>\r\n          <ion-checkbox color=\"purple\" [(ngModel)]=\"skill.progression.studentValue\" (ionChange)=\"updateValidation(skill.progression.id, skill.progression.studentValue)\"></ion-checkbox>\r\n        </ion-item>\r\n        <ion-item>\r\n          <ion-label>Validation du formateur</ion-label>          \r\n          <ion-checkbox color=\"red\" [(ngModel)]=\"skill.progression.teacherValue\" disabled=\"true\"></ion-checkbox>\r\n        </ion-item>\r\n      </ion-card>\r\n    </ion-list>\r\n    <h6>Total de compétences: {{ moduleSelected.progression.skillsCount }}</h6>\r\n    <h6 text-left>Validé par formateur: {{ moduleSelected.progression.teacherValidations }} - Validé par étudiant: {{ moduleSelected.progression.studentValidations }}</h6>\r\n  </div>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-toggle>\r\n        <ion-button>\r\n          <ion-icon slot=\"icon-only\" name=\"menu\"></ion-icon>\r\n        </ion-button>\r\n      </ion-menu-toggle>\r\n    </ion-buttons>\r\n    <ion-title text-center>Accueil</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button>\r\n        <ion-icon slot=\"icon-only\" name=\"arrow-dropdown\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-grid>\r\n    <!-- <ion-row>\r\n      <ion-col size=\"4\">\r\n        <div>\r\n            <img src=\"{{ environment.appImageUrl }}{{ formation.logo }}\">\r\n        </div>\r\n      </ion-col>\r\n      <ion-col size=\"\">\r\n        <div>\r\n          <h6>{{ formation.name }}</h6>\r\n        </div>\r\n        <div>\r\n          <h6>{{ formation.start_at | date: \"dd/MM/yyyy\" }} - {{ formation.end_at | date: \"dd/MM/yyyy\" }} </h6>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row> -->\r\n    <ion-row>\r\n      <ion-col size=\"8\">\r\n        <div>\r\n          <ion-icon name=\"square\" class=\"purple\"></ion-icon>&nbsp;Etudiant\r\n        </div>\r\n      </ion-col>\r\n    \r\n      <ion-col size=\"4\">\r\n        <div>\r\n          <ion-icon name=\"square\" class=\"red\"></ion-icon>&nbsp;Formateurs\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n  <h2 text-center>Modules</h2>\r\n  <ion-slides *ngIf=\"modules.length\">\r\n    <ion-slide class=\"roundProgressBarWrapper slideImportant\" *ngFor=\"let module of modules\" (click)=\"ShowModule(module)\">\r\n      <ion-label class=\"moduleName\">{{ module.name }}</ion-label>\r\n      <round-progress class=\"roundProgressBarTeacher\" [current]=\"module.progression.teacherValidations * 100/module.progression.skillsCount\"\r\n        [radius]=\"45\" [color]=\"environment.progressColorTeacher\" [max]=\"environment.progressMax\" [stroke]=\"environment.progressStrokeTeacher\"></round-progress>\r\n\r\n      <round-progress class=\"roundProgressBarStudent\" [current]=\"module.progression.studentValidations * 100/module.progression.skillsCount\"\r\n        [radius]=\"45\" [color]=\"environment.progressColorStudent\" [max]=\"environment.progressMax\" [stroke]=\"environment.progressStrokeStudent\"></round-progress>\r\n\r\n      <div class=\"progressTeacherText red\">{{ (module.progression.teacherValidations * 100/module.progression.skillsCount) | number: '1.0-0' }}%</div>\r\n      <div class=\"progressStudentText purple\">{{ (module.progression.studentValidations * 100/module.progression.skillsCount) | number: '1.0-0' }}%</div>\r\n    </ion-slide>\r\n  </ion-slides>\r\n\r\n  <div class=\"swiper-button-next\" (click)=\"slideNext()\"></div>\r\n  <div class=\"swiper-button-prev\" (click)=\"slidePrev()\"></div>\r\n\r\n  <h2 text-center>Compétences</h2>\r\n  \r\n  <div *ngIf=\"moduleSelected\">\r\n    <ion-list *ngIf=\"moduleSelected.skills.length\">   \r\n      <ion-card *ngFor=\"let skill of moduleSelected.skills\" class=\"cardShadows\">\r\n        \r\n        <h4 text-center>{{ moduleSelected.name }}</h4>\r\n        <ion-item>\r\n          <ion-label text-wrap>{{ skill.name }}</ion-label>          \r\n        </ion-item>\r\n        <ion-item>\r\n          <ion-label>Validation de l'étudiant</ion-label>\r\n          <ion-checkbox color=\"student\" [(ngModel)]=\"skill.progression.studentValue\" (ionChange)=\"updateValidation(skill.progression.id, skill.progression.studentValue)\"></ion-checkbox>\r\n        </ion-item>\r\n        <ion-item>\r\n          <ion-label>Validation du formateur</ion-label>          \r\n          <ion-checkbox color=\"teacher\" [(ngModel)]=\"skill.progression.teacherValue\" disabled=\"true\"></ion-checkbox>\r\n        </ion-item>\r\n      </ion-card>\r\n    </ion-list>\r\n    <h6>Total de compétences: {{ moduleSelected.progression.skillsCount }}</h6>\r\n    <h6 text-left>Validé par formateur: {{ moduleSelected.progression.teacherValidations }} - Validé par étudiant: {{ moduleSelected.progression.studentValidations }}</h6>\r\n  </div>\r\n</ion-content>"
 
 /***/ }),
 
@@ -124,6 +124,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var DashboardPage = /** @class */ (function () {
+    // tslint:disable-next-line:max-line-length
     function DashboardPage(platform, authService, apiService, menuCtrl) {
         this.platform = platform;
         this.authService = authService;
@@ -178,7 +179,7 @@ var DashboardPage = /** @class */ (function () {
         var _this = this;
         this.moduleSelected = this.modules[this.modules.findIndex(function (module, index, tab) {
             for (var i = void 0; i < _this.modules.length; i++) {
-                return module['id'] == moduleId;
+                return module['id'] === moduleId;
             }
             console.log('allSkills: ', _this.modules);
         })];
@@ -186,14 +187,19 @@ var DashboardPage = /** @class */ (function () {
     DashboardPage.prototype.goToSlide = function () {
         this.slides.slideTo(1);
     };
+    DashboardPage.prototype.slideChanged = function () {
+        var currentIndex = this.slides.getActiveIndex();
+        console.log('Current index is', currentIndex);
+        var reroll = this.slides.isEnd();
+        if (reroll) {
+            this.slides.slidePrev(5, true);
+        }
+    };
     DashboardPage.prototype.slideNext = function () {
         this.slides.slideNext();
     };
     DashboardPage.prototype.slidePrev = function () {
         this.slides.slidePrev();
-    };
-    DashboardPage.prototype.openMenu = function () {
-        this.menuCtrl.open();
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Slides"]),

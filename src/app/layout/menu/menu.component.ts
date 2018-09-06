@@ -27,6 +27,7 @@ export class MenuComponent implements OnInit {
         { title: 'Accueil', url: '/student/dashboard', icon: 'home' },
         { title: 'Rapports', url: '/student/reports', icon: 'clipboard' },
         { title: 'Plannings', url: '/student/plannings', icon: 'calendar' },
+        { title: 'Profil', url: '/student/profil', icon: 'person' }
       ]
     }
   ];

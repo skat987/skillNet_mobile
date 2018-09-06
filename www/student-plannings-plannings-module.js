@@ -62,7 +62,7 @@ var PlanningsPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>plannings</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-list insert>\r\n    <ion-card *ngIf=\"planning\" class=\"cardShadows\" >\r\n      <ion-item (click)=\"openFile(planning.url)\" item-content>\r\n        <h2 item-start>{{ planning.name }}</h2>\r\n        <ion-icon name=\"download\" md=\"md-download\" item-end></ion-icon>\r\n      </ion-item>\r\n      <ion-item item-content>\r\n        <h4 item-start>{{ planning.updatedAt | date:\"dd-MM-yyyy hh:mm\" }}</h4>\r\n      </ion-item>\r\n    </ion-card>\r\n  </ion-list>\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-toggle>\r\n        <ion-button>\r\n          <ion-icon slot=\"icon-only\" name=\"menu\"></ion-icon>\r\n        </ion-button>\r\n      </ion-menu-toggle>\r\n    </ion-buttons>\r\n    <ion-title text-center>Plannings</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-list insert>\r\n    <ion-card *ngIf=\"planning\" class=\"cardShadows\" >\r\n      <ion-item (click)=\"openFile(planning.url)\" item-content>\r\n        <h2 item-start>{{ planning.name }}</h2>\r\n        <ion-icon name=\"download\" md=\"md-download\" item-end></ion-icon>\r\n      </ion-item>\r\n      <ion-item item-content>\r\n        <h4 item-start>{{ planning.updatedAt | date:\"dd-MM-yyyy hh:mm\" }}</h4>\r\n      </ion-item>\r\n    </ion-card>\r\n  </ion-list>\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -136,6 +136,7 @@ var PlanningsPage = /** @class */ (function () {
     PlanningsPage.prototype.openFile = function (url) {
         var _this = this;
         var fileTransfer = this.transfer.create();
+        var apiUrl = 'http://skillstracking.motjo.io/uploads/calendars/';
         var path;
         if (this.platform.is('ios')) {
             path = this.file.documentsDirectory;
@@ -143,7 +144,7 @@ var PlanningsPage = /** @class */ (function () {
         else if (this.platform.is('android')) {
             path = this.file.dataDirectory;
         }
-        fileTransfer.download(url, path + url).then(function (entry) {
+        fileTransfer.download(apiUrl + url, path + url).then(function (entry) {
             console.log('open file controle: ', entry);
             _this.document.viewDocument(entry.toURL(), 'application/pdf', {});
         }).catch(function (e) { return console.log('Error opening file: ', e); });

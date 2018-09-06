@@ -63,7 +63,7 @@ var LoginPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content class=\"login-container\" scroll=\"false\">\r\n  <div class = \"col header text-center\">\r\n      <img src=\"assets/imgs/logo_skillnet.png\" class=\"logo\" />\r\n  </div>\r\n  <div class = \"col button-row text-center\">\r\n    <ion-item>\r\n      <ion-input [(ngModel)]=\"loginData.email\" name=\"email\" type=\"text\" placeholder=\"email\"></ion-input>\r\n    </ion-item>\r\n  </div>\r\n  <div class = \"col button-row text-center\">\r\n    <ion-item>\r\n      <ion-input [(ngModel)]=\"loginData.password\" name=\"password\" type=\"password\" placeholder=\"Password\"></ion-input>\r\n    </ion-item>\r\n  </div>\r\n  <div class = \"col button-row text-center\">\r\n    <button ion-button block type=\"submit\" color=\"--ion-color-secondary\" (click)=\"doLogin()\">Login</button>\r\n  </div>\r\n  <div class=\"col text-center\"><p>Mot de passe oublié ? <strong><a href=\"#\">Cliquez-ici !</a></strong></p>\r\n  </div>           \r\n</ion-content>\r\n"
+module.exports = "<ion-content class=\"login-container\" padding>\r\n  <div class = \"col header text-center\">\r\n      <img src=\"assets/imgs/logo_skillnet.png\" class=\"logo\" />\r\n  </div>\r\n  <form [formGroup]=\"loginForm\" (submit)=\"doLogin()\">\r\n    <ion-item>\r\n      <ion-icon name=\"mail\" item-start class=\"text-primary\"></ion-icon>\r\n      <ion-input formControlName=\"email\" type=\"email\" placeholder=\"  Votre email\"></ion-input>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"lock\" item-start class=\"text-primary\"></ion-icon>\r\n      <ion-input formControlName=\"password\" type=\"password\" placeholder=\"  Votre mot de passe\"></ion-input>\r\n    </ion-item>\r\n    <ion-button color=\"secondary\" expand=\"full\" type=\"submit\">\r\n      C'est parti !\r\n    </ion-button>\r\n  </form>\r\n  <p text-right ion-text white tappable><strong>Mot de passe oublié ?</strong></p>\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -74,7 +74,7 @@ module.exports = "<ion-content class=\"login-container\" scroll=\"false\">\r\n  
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-content {\n  background: #2E1166; }\n\nion-item {\n  background: white; }\n\n.login-container > .header {\n  padding-top: 20px; }\n\np {\n  color: white;\n  font-size: 15px; }\n\nimg {\n  height: 45vh;\n  width: auto;\n  margin: auto;\n  display: block; }\n"
+module.exports = "ion-content {\n  background: #2E1166; }\n\nion-item {\n  background: white; }\n\n.login-container > header {\n  padding-top: 20px; }\n\nimg {\n  height: 45vh;\n  width: auto;\n  margin: auto;\n  display: block; }\n\np {\n  color: white; }\n"
 
 /***/ }),
 
