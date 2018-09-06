@@ -7,71 +7,62 @@
                     margin: 20px 20px 15px;
           }
 
-          .roundProgressBarWrapper.responsive {
-                    width: 80%;
-                    min-height: 280px;
-                    float: none;
-                    margin: 20px auto;
-          }
-
-          .roundProgressBarWrapper circle {
-                    stroke: #DEDDFF !important;
-          }
-
-          .roundProgressBar,
-          .roundProgressBarTeacher,
-          .roundProgressBarStudent,
-          .progressTeacherText,
-          .progressStudentText,
-          .moduleName {
-                    position: absolute !important;
-          }
-
-          .roundProgressBarTeacher {
-                    width: 120px !important;
-                    height: 120px !important;
-                    left: 11px;
-                    top: 0px;
-          }
-
-          .roundProgressBarStudent {
-                    width: 95px !important;
-                    height: 95px !important;
-                    left: 23px;
-                    top: 12px;
-          }
-
-          .progressTeacherText {
-                    top: 40px;
-                    width: 140px;
-                    text-align: center;
-                    font-size: 20px;
-                    left: 0px;
-          }
-
-          .progressStudentText {
-                    top: 60px;
-                    width: 140px;
-                    text-align: center;
-                    font-size: 20px;
-                    left: 0px;
-          }
-
-          .moduleName {
-                    top: 135px;
-                    width: 140px;
-                    text-align: center;
-                    font-size: 14px;
-                    font-weight: bold;
-                    white-space: normal;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-          }
-
-          .roundProgressBarWrapper.slideImportant {
-                    width: 150px !important;
-          }
-
+          // .roundProgressBarWrapper.responsive {
+          //           width: 80%;
+          //           min-height: 280px;
+          //           float: none;
+          //           margin: 20px auto;
+          // }
+          // .roundProgressBarWrapper circle {
+          //           stroke: #DEDDFF !important;
+          // }
+          // .roundProgressBar,
+          // .roundProgressBarTeacher,
+          // .roundProgressBarStudent,
+          // .progressTeacherText,
+          // .progressStudentText,
+          // .moduleName {
+          //           position: absolute !important;
+          // }
+          // .roundProgressBarTeacher {
+          //           width: 120px !important;
+          //           height: 120px !important;
+          //           left: 11px;
+          //           top: 0px;
+          // }
+          // .roundProgressBarStudent {
+          //           width: 95px !important;
+          //           height: 95px !important;
+          //           left: 23px;
+          //           top: 12px;
+          // }
+          // .progressTeacherText {
+          //           top: 40px;
+          //           width: 140px;
+          //           text-align: center;
+          //           font-size: 20px;
+          //           left: 0px;
+          // }
+          // .progressStudentText {
+          //           top: 60px;
+          //           width: 140px;
+          //           text-align: center;
+          //           font-size: 20px;
+          //           left: 0px;
+          // }
+          // .moduleName {
+          //           top: 135px;
+          //           width: 140px;
+          //           text-align: center;
+          //           font-size: 14px;
+          //           font-weight: bold;
+          //           white-space: normal;
+          //           overflow: hidden;
+          //           text-overflow: ellipsis;
+          // }
+          // .roundProgressBarWrapper.slideImportant {
+          //           width: 150px !important;
+          // }
           // .roundProgressBarTeacherAll {
           //   width: 120px !important;
           //   height: 120px !important;

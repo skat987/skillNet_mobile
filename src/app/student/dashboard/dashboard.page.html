@@ -7,10 +7,10 @@
 <ion-content padding>
   <ion-card *ngIf="student">
     <ion-img src="{{ student.avatar }}"></ion-img>
-  
+
     <ion-card-content>
       <ion-card-title>{{ student.fullName }}</ion-card-title>
-  
+
       <ion-list *ngIf="modules.length">
         <ion-list-header>
           Module de l'étudiant
@@ -29,13 +29,13 @@
     <h6>Compétences: {{ moduleSelected.progression.skillsCount }}</h6>
     <h6>Validations du formateur: {{ moduleSelected.progression.teacherValidations }}</h6>
     <h6>Validations de l'étudiant: {{ moduleSelected.progression.studentValidations }}</h6>
-    <div *ngIf="moduleSelected.skills.length">      
+    <div *ngIf="moduleSelected.skills.length">
       <ion-list *ngFor="let skill of moduleSelected.skills">
         <ion-item>
-          <ion-label>Compétences: {{ skill.name }}</ion-label>          
+          <ion-label>Compétences: {{ skill.name }}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Validation du formateur</ion-label>          
+          <ion-label>Validation du formateur</ion-label>
           <ion-checkbox color="light" [(ngModel)]="skill.progression.teacherValue" disabled="true"></ion-checkbox>
         </ion-item>
         <ion-item>
@@ -44,5 +44,5 @@
         </ion-item>
       </ion-list>
     </div>
-  </div>  
+  </div>
 </ion-content>

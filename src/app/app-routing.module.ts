@@ -31,7 +31,8 @@ const routes: Routes = [
       { path: 'teacher/report-details', loadChildren: './teacher/report-details/report-details.module#ReportDetailsPageModule' },
       { path: 'teacher/plannings', loadChildren: './teacher/plannings/plannings.module#PlanningsPageModule' }
     ]
-  }
+  },  { path: 'ModalPage', loadChildren: './modal-page/modal-page.module#ModalPagePageModule' }
+
 ];
 
 @NgModule({

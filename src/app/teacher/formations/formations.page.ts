@@ -44,6 +44,7 @@ export class FormationsPage implements OnInit {
   public dataFormation: any;
   public formation: any;
   public formationId: any;
+  shownGroup: any;
 
   constructor(private apiService: ApiService, private platform: Platform, private authService: AuthService, private router: Router) { }
 
@@ -127,6 +128,18 @@ export class FormationsPage implements OnInit {
 
   slidePrev() {
     this.slides.slidePrev();
+  }
+
+  toggleGroup(group) {
+    if (this.isGroupShown(group)) {
+      this.shownGroup = null;
+    } else {
+      this.shownGroup = group;
+    }
+  }
+
+  isGroupShown(group) {
+    return this.shownGroup === group;
   }
 
 }

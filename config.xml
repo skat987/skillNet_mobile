@@ -3,7 +3,7 @@
     <name>skill_net_mobile</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.1.129:8103" />
+    <content original-src="index.html" src="http://192.168.137.50:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -90,5 +90,6 @@
     <allow-navigation href="http://192.168.1.129:8102" />
     <allow-navigation href="http://192.168.1.129:8103" />
     <allow-navigation href="http://192.168.1.129:8104" />
+    <allow-navigation href="http://192.168.137.50:8100" sessionid="4b0cd12d" />
     <engine name="android" spec="^7.1.1" />
 </widget>
