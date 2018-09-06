@@ -76,18 +76,21 @@
   --ion-color-dark-tint: #383838;
 
   /** student **/
-  --ion-color-purple: #a3a1fb;
-  --ion-color-purple-rgb: 163, 161, 251;
-  --ion-color-purple-contrast: #fff;
-  --ion-color-purple-contrast-rgb: 255,255,255;
-  --ion-color-purple-shade: #8f8edd;
-  --ion-color-purple-tint: #acaafb;
+  --ion-color-student: #a3a1fb;
+  --ion-color-student-rgb: 163, 161, 251;
+  --ion-color-student-contrast: #fff;
+  --ion-color-student-contrast-rgb: 255,255,255;
+  --ion-color-student-shade: #8f8edd;
+  --ion-color-student-tint: #acaafb;
 
   /** teacher **/
-  --ion-color-red: #e689b8;
-  --ion-color-red-rgb: 230, 137, 184;
-  --ion-color-red-contrast: #fff;
-  --ion-color-red-contrast-rgb: 255,255,255;
-  --ion-color-red-shade: #ca79a2;
-  --ion-color-red-tint: #e995bf;
+  --ion-color-teacher: #e689b8;
+  --ion-color-teacher-rgb: 230, 137, 184;
+  --ion-color-teacher-contrast: #fff;
+  --ion-color-teacher-contrast-rgb: 255,255,255;
+  --ion-color-teacher-shade: #ca79a2;
+  --ion-color-teacher-tint: #e995bf;
+
+  --ion-toolbar-background-color: #2E1166;
+  --ion-toolbar-text-color: white;
 }

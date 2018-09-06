@@ -77,11 +77,11 @@
         </ion-item>
         <ion-item>
           <ion-label>Validation de l'étudiant</ion-label>
-          <ion-checkbox color="purple" [(ngModel)]="skill.progression.studentValue" (ionChange)="updateValidation(skill.progression.id, skill.progression.studentValue)"></ion-checkbox>
+          <ion-checkbox color="student" [(ngModel)]="skill.progression.studentValue" (ionChange)="updateValidation(skill.progression.id, skill.progression.studentValue)"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label>Validation du formateur</ion-label>          
-          <ion-checkbox color="red" [(ngModel)]="skill.progression.teacherValue" disabled="true"></ion-checkbox>
+          <ion-checkbox color="teacher" [(ngModel)]="skill.progression.teacherValue" disabled="true"></ion-checkbox>
         </ion-item>
       </ion-card>
     </ion-list>
