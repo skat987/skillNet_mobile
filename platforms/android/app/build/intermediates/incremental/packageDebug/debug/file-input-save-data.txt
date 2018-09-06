@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Sep 06 09:33:37 HST 2018
+#Thu Sep 06 11:08:57 HST 2018
 1007.base=F\:\\skillNet_mobile\\platforms\\android\\app\\build\\intermediates\\assets\\debug
 835.base=F\:\\skillNet_mobile\\platforms\\android\\app\\build\\intermediates\\assets\\debug
 100.set=ASSET
