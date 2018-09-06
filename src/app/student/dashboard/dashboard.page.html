@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar primary>
     <ion-buttons slot="start">
       <ion-menu-toggle>
         <ion-button>
@@ -18,7 +18,7 @@
 
 <ion-content padding>
   <ion-grid>
-    <ion-row>
+    <!-- <ion-row>
       <ion-col size="4">
         <div>
             <img src="{{ environment.appImageUrl }}{{ formation.logo }}">
@@ -30,6 +30,19 @@
         </div>
         <div>
           <h6>{{ formation.start_at | date: "dd/MM/yyyy" }} - {{ formation.end_at | date: "dd/MM/yyyy" }} </h6>
+        </div>
+      </ion-col>
+    </ion-row> -->
+    <ion-row>
+      <ion-col size="8">
+        <div>
+          <ion-icon name="square" class="purple"></ion-icon>&nbsp;Etudiant
+        </div>
+      </ion-col>
+    
+      <ion-col size="4">
+        <div>
+          <ion-icon name="square" class="red"></ion-icon>&nbsp;Formateurs
         </div>
       </ion-col>
     </ion-row>
@@ -51,22 +64,6 @@
 
   <div class="swiper-button-next" (click)="slideNext()"></div>
   <div class="swiper-button-prev" (click)="slidePrev()"></div>
-
-  <ion-grid class="modules">
-    <ion-row>
-      <ion-col size="8">
-        <div>
-          <ion-icon name="square" class="purple"></ion-icon>&nbsp;Etudiant
-        </div>
-      </ion-col>
-   
-      <ion-col size="4">
-        <div>
-          <ion-icon name="square" class="red"></ion-icon>&nbsp;Formateurs
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
 
   <h2 text-center>Compétences</h2>
   

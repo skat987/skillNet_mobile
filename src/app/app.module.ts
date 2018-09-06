@@ -19,10 +19,11 @@ import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 // Components
 import { MenuComponent } from './layout/menu/menu.component';
 import {RoundProgressModule} from 'angular-svg-round-progressbar';
+import { HeaderComponent } from './layout/header/header.component';
 
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent],
+  declarations: [AppComponent, MenuComponent, HeaderComponent],
   entryComponents: [],
   imports: [
     HttpClientModule,

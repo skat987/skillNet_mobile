@@ -89,15 +89,20 @@ export class DashboardPage implements OnInit {
     this.slides.slideTo(1);
   }
 
+  slideChanged() {
+    const currentIndex = this.slides.getActiveIndex();
+    console.log('Current index is', currentIndex);
+    const reroll = this.slides.isEnd();
+    if (reroll) {
+      this.slides.slidePrev(5, true);
+    }
+  }
+
   public slideNext() {
     this.slides.slideNext();
   }
 
   public slidePrev() {
     this.slides.slidePrev();
-  }
-
-  public openMenu() {
-    this.menuCtrl.open();
   }
 }
