@@ -22,6 +22,7 @@ export class StudentDashboardPage implements OnInit {
     public student: Student;
     public modules: ModuleFormation[] = [];
     public moduleSelected: ModuleFormation;
+    displayBlock = 0;
 
     // tslint:disable-next-line:max-line-length
     constructor(private platform: Platform, private route: ActivatedRoute, private apiService: ApiService, private modalCtrl: ModalController) { }
@@ -59,10 +60,7 @@ export class StudentDashboardPage implements OnInit {
             .catch(e => console.log('Error updating validation: ', e));
     }
 
-    async openModal() {
-        const modal = await this.modalCtrl.create({
-            component: ModalPagePage
-        });
-        return await modal.present();
+    public display() {
+        return this.displayBlock;
     }
 }
