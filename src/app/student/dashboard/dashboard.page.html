@@ -48,8 +48,8 @@
     </ion-row>-->
   </ion-grid>
   <h2 text-uppercase text-center>Modules</h2>
-  <ion-slides *ngIf="modules.length">
-    <ion-slide class="roundProgressBarWrapper slideImportant" *ngFor="let module of modules" (click)="ShowModule(module)">
+  <ion-slides *ngIf="formationSelected.modules.length">
+    <ion-slide class="roundProgressBarWrapper slideImportant" *ngFor="let module of formationSelected.modules" (click)="showModule(module)">
       <ion-label class="moduleName">{{ module.name }}</ion-label>
       <round-progress class="roundProgressBarTeacher" [current]="module.progression.teacherValidations * 100/module.progression.skillsCount"
         [radius]="45" [color]="environment.progressColorTeacher" [max]="environment.progressMax" [stroke]="environment.progressStrokeTeacher"></round-progress>
@@ -78,7 +78,24 @@
   </ion-grid>
 
   <h2 text-uppercase text-center>Compétences</h2>
-  
+  <div *ngIf="!moduleSelected">
+    <ion-list *ngFor="let module of formationSelected.modules ">
+      <ion-card *ngFor="let skill of module.skills" class="cardShadows">
+        <h4 text-center>{{ module.name }}</h4>
+        <ion-item>
+          <ion-label text-wrap>{{ skill.name }}</ion-label>          
+        </ion-item>
+        <ion-item>
+          <ion-label>Validation de l'étudiant</ion-label>
+          <ion-checkbox color="student" [(ngModel)]="skill.progression.studentValue" (ionChange)="updateValidation(skill.progression.id, skill.progression.studentValue)"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Validation du formateur</ion-label>          
+          <ion-checkbox color="teacher" [(ngModel)]="skill.progression.teacherValue" disabled="true"></ion-checkbox>
+        </ion-item>
+      </ion-card>
+    </ion-list>
+  </div>
   <div *ngIf="moduleSelected">
     <ion-list *ngIf="moduleSelected.skills.length">   
       <ion-card *ngFor="let skill of moduleSelected.skills" class="cardShadows">
