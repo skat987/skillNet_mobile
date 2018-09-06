@@ -78,11 +78,23 @@
   /** student **/
   --ion-color-purple: #a3a1fb;
   --ion-color-purple-rgb: 163, 161, 251;
+  --ion-color-purple-contrast: #fff;
+  --ion-color-purple-contrast-rgb: 255,255,255;
+  --ion-color-purple-shade: #8f8edd;
+  --ion-color-purple-tint: #acaafb;
 
   /** teacher **/
   --ion-color-red: #e689b8;
   --ion-color-red-rgb: 230, 137, 184;
+  --ion-color-red-contrast: #fff;
+  --ion-color-red-contrast-rgb: 255,255,255;
+  --ion-color-red-shade: #ca79a2;
+  --ion-color-red-tint: #e995bf;
 }
 ion-toolbar {
+  background: #2E1166;
+}
+
+ion-header {
   background: #2E1166;
 }

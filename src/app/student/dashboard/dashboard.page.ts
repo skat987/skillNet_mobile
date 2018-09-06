@@ -27,6 +27,7 @@ export class DashboardPage implements OnInit {
   public formation: any;
   public environment = environment;
 
+  // tslint:disable-next-line:max-line-length
   constructor(private platform: Platform, private authService: AuthService, private apiService: ApiService, public menuCtrl: MenuController) { }
 
   ngOnInit() {
@@ -43,7 +44,7 @@ export class DashboardPage implements OnInit {
 
   private setModules(): void {
     this.apiService.get('studentsFormation').then((data: any) => {
-      for (let i = 0; i < data.length; i++ ){
+      for (let i = 0; i < data.length; i++ ) {
         this.formation = data[i];
       }
       console.log('formation: ', this.formation);
@@ -75,24 +76,24 @@ export class DashboardPage implements OnInit {
 
   public filterByModule(moduleId) {
     this.moduleSelected = this.modules[
-      this.modules.findIndex((module, index, tab) => { 
-        for(let i; i < this.modules.length; i++) {
-          return module['id'] == moduleId;
-        } 
+      this.modules.findIndex((module, index, tab) => {
+        for (let i; i < this.modules.length; i++) {
+          return module['id'] === moduleId;
+        }
         console.log('allSkills: ', this.modules);
       })
     ];
-  } 
+  }
 
   public goToSlide() {
     this.slides.slideTo(1);
   }
 
-  public slideNext(){
+  public slideNext() {
     this.slides.slideNext();
   }
 
-  public slidePrev(){
+  public slidePrev() {
     this.slides.slidePrev();
   }
 

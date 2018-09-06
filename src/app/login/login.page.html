@@ -1,21 +1,16 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
+<ion-content class="login-container" padding>
+  <div class = "col header text-center">
+      <img src="assets/imgs/logo_skillnet.png" class="logo" />
+  </div>
   <form [formGroup]="loginForm" (submit)="doLogin()">
     <ion-item>
-      <ion-label stacked>Email</ion-label>
       <ion-input formControlName="email" type="email" placeholder="Votre email"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label stacked>Password</ion-label>
       <ion-input formControlName="password" type="password" placeholder="Votre mot de passe"></ion-input>
     </ion-item>
-    <ion-button shape="round" color="primary" fill="outline" type="submit">
-      Log In
+    <ion-button color="secondary" expand="full" type="submit">
+      C'est parti !
     </ion-button>
   </form>
 </ion-content>
