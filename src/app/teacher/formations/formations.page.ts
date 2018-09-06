@@ -39,7 +39,7 @@ export class FormationsPage implements OnInit {
     this.apiService.get('teacher/myFormations').then((resp: any) => {
       for (let i = 0; i < resp['data'].length; i++) {
         // tslint:disable-next-line:max-line-length
-        this.teacher.addFormation(new Formation(resp['data'][i].id, resp['data'][i].name, resp['data'][i].logo, resp['data'][i].start_at, resp['data'][i].end_at, resp['data'][i].total_students));
+        this.teacher.addFormation(new Formation(resp['data'][i].id, resp['data'][i].name, resp['data'][i].logo, resp['data'][i].start_at, resp['data'][i].end_at, null, null, resp['data'][i].total_students));
         for (let j = 0; j < resp['data'][i].modules.length; j++) {
           this.teacher.formations[i].addModule(new ModuleFormation(resp['data'][i].modules[j].id, resp['data'][i].modules[j].name));
         }

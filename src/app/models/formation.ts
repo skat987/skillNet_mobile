@@ -13,18 +13,29 @@ export class Formation {
     logo: any;
     startAt: any;
     endAt: any;
-    studentCount: any;
+    createdAt: any;
+    updatedAt: any;
+    studentsCount: any;
+    teachersCount: any;
+    modulesCount: any;
+    skillsCount: any;
     students: Student[] = [];
     modules: ModuleFormation[] = [];
     reports: Report[] = [];
 
-    constructor (id?: any, name?: any, logo?: any, startAt?: any, endAt?: any, studentCount?: any) {
+    // tslint:disable-next-line:max-line-length
+    constructor (id?: any, name?: any, logo?: any, startAt?: any, endAt?: any, createdAt?: any, updatedAt?: any, studentsCount?: any, teachersCount?: any, modulesCount?: any, skillsCount?: any) {
         this.id = id;
         this.name = name;
         this.logo = _APP_LOGO_URL + logo;
         this.startAt = startAt;
         this.endAt = endAt;
-        this.studentCount = studentCount;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.studentsCount = studentsCount;
+        this.teachersCount = teachersCount;
+        this.modulesCount = modulesCount;
+        this.skillsCount = skillsCount;
     }
 
     public addStudent(student: Student): void {

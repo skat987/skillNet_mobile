@@ -35,7 +35,7 @@
           </ion-list>
           <ion-list *ngIf="formation.students.length">
             <ion-list-header>
-              Etudiants de la formation: {{ formation.studentCount }}
+              Etudiants de la formation: {{ formation.studentsCount }}
             </ion-list-header>
             <ion-item *ngFor="let student of formation.students" (click)="showStudentDashBoard(student.id, formation.id)">
               <ion-icon name="arrow-forward" item-end></ion-icon>
