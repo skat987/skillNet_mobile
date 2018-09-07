@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Platform, MenuController  } from '@ionic/angular';
+import { Slides } from '@ionic/angular';
 
 // Models
 import { Skill } from '../../models/skill';
@@ -12,6 +13,7 @@ import { ProgressionDetails } from '../../models/progression-details';
 // Services
 import { AuthService } from '../../service/auth/auth.service';
 import { ApiService } from '../../service/api/api.service';
+import { environment } from './../../../environments/environment.prod';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,11 +21,15 @@ import { ApiService } from '../../service/api/api.service';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
+  @ViewChild(Slides) slides: Slides;
   public student: Student;
   public formationSelected: Formation;
   public moduleSelected: ModuleFormation;
+  public formation: any;
+  public environment = environment;
 
-  constructor(private platform: Platform, private authService: AuthService, private apiService: ApiService) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(private platform: Platform, private authService: AuthService, private apiService: ApiService, public menuCtrl: MenuController) { }
 
   ngOnInit() {
     this.platform.ready().then(() => this.setStudent());
