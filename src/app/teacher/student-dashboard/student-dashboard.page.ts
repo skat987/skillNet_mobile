@@ -1,6 +1,5 @@
-import { ModalPagePage } from '../modal-page/modal-page.page';
 import { Component, OnInit } from '@angular/core';
-import { Platform, ModalController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 
 // Services
@@ -22,10 +21,10 @@ export class StudentDashboardPage implements OnInit {
     public student: Student;
     public modules: ModuleFormation[] = [];
     public moduleSelected: ModuleFormation;
-    displayBlock = 0;
+    public display: any;
 
     // tslint:disable-next-line:max-line-length
-    constructor(private platform: Platform, private route: ActivatedRoute, private apiService: ApiService, private modalCtrl: ModalController) { }
+    constructor(private platform: Platform, private route: ActivatedRoute, private apiService: ApiService) { }
 
     ngOnInit() {
         // tslint:disable-next-line:max-line-length
@@ -51,16 +50,27 @@ export class StudentDashboardPage implements OnInit {
     }
 
     public ShowModule(module: ModuleFormation): void {
-        this.moduleSelected = module;
+        if (this.isGroupShown(module)) {
+            this.moduleSelected = null;
+            this.display = null;
+        } else {
+            this.moduleSelected = module;
+            this.display = 1;
+        }
+    }
+
+    public isGroupShown(module: ModuleFormation) {
+        return this.moduleSelected === module;
+    }
+
+    public back() {
+        this.display = null;
+        this.moduleSelected = null;
     }
 
     public updateValidation(progressionId: any, validation: any): void {
         this.apiService.put('progression/updateTeacherValidation', { progression_id: progressionId, teacher_validation: validation })
             .then(resp => console.log('update validation: ', resp))
             .catch(e => console.log('Error updating validation: ', e));
-    }
-
-    public display() {
-        return this.displayBlock;
     }
 }
