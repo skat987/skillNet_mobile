@@ -36,7 +36,6 @@ export class PlanningsPage implements OnInit {
 
   public openFile(url: any): void {
     const fileTransfer: FileTransferObject = this.transfer.create();
-    const apiUrl = 'http://skillstracking.motjo.io/uploads/calendars/';
     let path: any;
     if (this.platform.is('ios')) {
       path = this.file.documentsDirectory;
