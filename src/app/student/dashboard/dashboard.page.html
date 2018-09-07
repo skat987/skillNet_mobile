@@ -30,10 +30,8 @@
         <round-progress class="roundProgressBarStudent" [current]="module.progression.studentValidations * 100/module.progression.skillsCount"
           [radius]="45" [color]="environment.progressColorStudent" [max]="environment.progressMax" [stroke]="environment.progressStrokeStudent"></round-progress>
 
-        <div class="progressTeacherText red">{{ (module.progression.teacherValidations *
-          100/module.progression.skillsCount) | number: '1.0-0' }}%</div>
-        <div class="progressStudentText purple">{{ (module.progression.studentValidations *
-          100/module.progression.skillsCount) | number: '1.0-0' }}%</div>
+        <div class="progressTeacherText red">{{ (module.progression.teacherValidations * 100/module.progression.skillsCount) | number: '1.0-0' }}%</div>
+        <div class="progressStudentText purple">{{ (module.progression.studentValidations * 100/module.progression.skillsCount) | number: '1.0-0' }}%</div>
       </ion-slide>
     </ion-slides>
 
