@@ -67,13 +67,13 @@
     text-overflow: ellipsis;
   }
   .roundProgressBarWrapper.slideImportant {
-    width: 150px !important;
+    width: 166px !important;
   }
 
   ion-slides {
     display: block;
     width: 100%;
-    height: 35%;
+    height: 200px;
   }
   .swiper-button-next {
     top: 110px;
@@ -100,7 +100,7 @@
   }
 
   .cardShadows {
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.19), 0 6px 6px rgba(255, 255, 255,0.23);
   }
 
   .icon {
