@@ -48,67 +48,49 @@
       <round-progress class="roundProgressBarTeacher" [current]="module.progression.teacherValidations * 100/module.progression.skillsCount"
         [radius]="45" [color]="environment.progressColorTeacher" [max]="environment.progressMax" [stroke]="environment.progressStrokeTeacher"></round-progress>
 
-      <round-progress class="roundProgressBarStudent" [current]="module.progression.studentValidations * 100/module.progression.skillsCount"
-        [radius]="45" [color]="environment.progressColorStudent" [max]="environment.progressMax" [stroke]="environment.progressStrokeStudent"></round-progress>
-
-      <div class="progressTeacherText red">{{ (module.progression.teacherValidations * 100/module.progression.skillsCount) | number: '1.0-0' }}%</div>
-      <div class="progressStudentText purple">{{ (module.progression.studentValidations * 100/module.progression.skillsCount) | number: '1.0-0' }}%</div>
     </ion-slide>
   </ion-slides>
 
-  <div class="swiper-button-next" (click)="slideNext()"></div>
-  <div class="swiper-button-prev" (click)="slidePrev()"></div>
+  <ion-card *ngIf="formationSelected">
+    <ion-img src="{{ formationSelected.logo }}"></ion-img>
+  
+    <ion-card-content>
+      <ion-card-title>{{ formationSelected.name }}</ion-card-title>
+  
+      <ion-list *ngIf="formationSelected.modules.length">
+        <ion-list-header>
+          Modules de l'étudiant: 
+        </ion-list-header>
 
-  <ion-grid>
-    <ion-row justify-content-start>
-      <ion-col size="4">
-        <ion-icon name="square" class="purple"></ion-icon>&nbsp;Etudiant
-      </ion-col>
-    
-      <ion-col size="4">
-        <ion-icon name="square" class="red"></ion-icon>&nbsp;Formateurs
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        <ion-item>
+          <ion-label>Sélectionner un module</ion-label>
+          <ion-select #moduleSelect (ionChange)="showModule(moduleSelect.value)">
+            <ion-select-option *ngFor="let module of formationSelected.modules" [value]="module">{{ module.name }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
-  <h2 text-uppercase text-center>Compétences</h2>
-  <div *ngIf="!moduleSelected">
-    <ion-list *ngFor="let module of formationSelected.modules ">
-      <ion-card *ngFor="let skill of module.skills" class="cardShadows">
-        <h4 text-center>{{ module.name }}</h4>
-        <ion-item>
-          <ion-label text-wrap>{{ skill.name }}</ion-label>          
-        </ion-item>
-        <ion-item>
-          <ion-label>Validation de l'étudiant</ion-label>
-          <ion-checkbox color="student" [(ngModel)]="skill.progression.studentValue" (ionChange)="updateValidation(skill.progression.id, skill.progression.studentValue)"></ion-checkbox>
-        </ion-item>
-        <ion-item>
-          <ion-label>Validation du formateur</ion-label>          
-          <ion-checkbox color="teacher" [(ngModel)]="skill.progression.teacherValue" disabled="true"></ion-checkbox>
-        </ion-item>
-      </ion-card>
-    </ion-list>
-  </div>
   <div *ngIf="moduleSelected">
-    <ion-list *ngIf="moduleSelected.skills.length">   
-      <ion-card *ngFor="let skill of moduleSelected.skills" class="cardShadows">
-        
-        <h4 text-center>{{ moduleSelected.name }}</h4>
+    <h3>Module: {{ moduleSelected.name }}</h3>
+    <h6>Compétences: {{ moduleSelected.progression.skillsCount }}</h6>
+    <h6>Validations du formateur: {{ moduleSelected.progression.teacherValidations }}</h6>
+    <h6>Validations de l'étudiant: {{ moduleSelected.progression.studentValidations }}</h6>
+    <div *ngIf="moduleSelected.skills.length">      
+      <ion-list *ngFor="let skill of moduleSelected.skills">
         <ion-item>
-          <ion-label text-wrap>{{ skill.name }}</ion-label>          
-        </ion-item>
-        <ion-item>
-          <ion-label>Validation de l'étudiant</ion-label>
-          <ion-checkbox color="student" [(ngModel)]="skill.progression.studentValue" (ionChange)="updateValidation(skill.progression.id, skill.progression.studentValue)"></ion-checkbox>
+          <ion-label>Compétences: {{ skill.name }}</ion-label>          
         </ion-item>
         <ion-item>
           <ion-label>Validation du formateur</ion-label>          
-          <ion-checkbox color="teacher" [(ngModel)]="skill.progression.teacherValue" disabled="true"></ion-checkbox>
+          <ion-checkbox color="light" [(ngModel)]="skill.progression.teacherValue" disabled="true"></ion-checkbox>
         </ion-item>
-      </ion-card>
-    </ion-list>
-    <h6>Total de compétences: {{ moduleSelected.progression.skillsCount }}</h6>
-    <h6 text-left>Validé par formateur: {{ moduleSelected.progression.teacherValidations }} - Validé par étudiant: {{ moduleSelected.progression.studentValidations }}</h6>
-  </div>
+        <ion-item>
+          <ion-label>Validation de l'étudiant</ion-label>
+          <ion-checkbox color="light" [(ngModel)]="skill.progression.studentValue" (ionChange)="updateValidation(skill.progression.id, skill.progression.studentValue)"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>  
 </ion-content>
