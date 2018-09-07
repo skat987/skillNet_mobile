@@ -70,49 +70,6 @@
     width: 150px !important;
   }
 
-  // .roundProgressBarTeacherAll {
-  //   width: 120px !important;
-  //   height: 120px !important;
-  //   left: 11px;
-  //   top: 0px;
-  // }
-  
-  // .roundProgressBarStudentAll {
-  //   width: 95px !important;
-  //   height: 95px !important;
-  //   left: 23px;
-  //   top: 12px;
-  // }
-
-  // .progressTeacherTextAll {
-  //   top: 40px;
-  //   width: 140px;
-  //   text-align: center;
-  //   font-size: 20px;
-  //   left: 0px;
-  // }
-  // .progressStudentTextAll {
-  //   top: 60px;
-  //   width: 140px;
-  //   text-align: center;
-  //   font-size: 20px;
-  //   left: 0px;
-  // }
-  // .moduleNameAll {
-  //   top: 135px;
-  //   width: 140px;
-  //   text-align: center;
-  //   font-size: 14px;
-  //   font-weight: bold;
-  //   white-space: normal;
-  //   overflow: hidden;
-  //   text-overflow: ellipsis;
-  // }
-
-  // .roundProgressBarWrapperAll.slideImportant {
-  //   width: 350px !important;
-  // }
-
   ion-slides {
     display: block;
     width: 100%;
@@ -148,4 +105,19 @@
 
   .icon {
     font-size: 20px
+  }
+
+  .Container {
+    background-color: #2E1166;
+  }
+
+  .moduleContainer {
+    background-color: white;
+  }
+
+  .logo {
+    opacity: 0.45;
+    width: 100vw;
+    height: 90px;
+    overflow-y: hidden;
   }
