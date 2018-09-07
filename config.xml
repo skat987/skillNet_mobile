@@ -85,5 +85,11 @@
     <plugin name="cordova-plugin-document-viewer" spec="^0.9.10" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
-    <engine name="android" spec="7.0.0" />
+    <allow-navigation href="http://192.168.1.129:8100" />
+    <allow-navigation href="http://192.168.1.129:8101" />
+    <allow-navigation href="http://192.168.1.129:8102" />
+    <allow-navigation href="http://192.168.1.129:8103" />
+    <allow-navigation href="http://192.168.1.129:8104" />
+    <allow-navigation href="http://192.168.137.50:8100" sessionid="4b0cd12d" />
+    <engine name="android" spec="^7.1.1" />
 </widget>

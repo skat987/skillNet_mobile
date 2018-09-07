@@ -2,12 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import {RoundProgressModule} from 'angular-svg-round-progressbar';
 
 import { IonicModule } from '@ionic/angular';
 
 import { DashboardPage } from './dashboard.page';
-
 
 const routes: Routes = [
   {
@@ -21,7 +19,6 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RoundProgressModule,
     RouterModule.forChild(routes)
   ],
   declarations: [DashboardPage]
