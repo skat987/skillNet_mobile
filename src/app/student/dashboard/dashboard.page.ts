@@ -95,14 +95,14 @@ export class DashboardPage implements OnInit {
   }
 
   public filterByModule(moduleId) {
-    this.moduleSelected = this.formationSelected.modules[
-      this.formationSelected.modules.findIndex((module, index, tab) => {
-        for (let i; i < this.formationSelected.modules.length; i++) {
-          return module['id'] === moduleId;
-        }
-        console.log('allSkills: ', this.formationSelected.modules);
-      })
-    ];
+    // this.moduleSelected = this.formationSelected.modules[
+    //   this.formationSelected.modules.findIndex((module, index, tab) => {
+    //     for (let i; i < this.formationSelected.modules.length; i++) {
+    //       return module['id'] === moduleId;
+    //     }
+    //     console.log('allSkills: ', this.formationSelected.modules);
+    //   })
+    // ];
   }
 
   public goToSlide() {
