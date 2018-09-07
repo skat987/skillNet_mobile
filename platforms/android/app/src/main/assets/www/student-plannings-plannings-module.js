@@ -144,7 +144,7 @@ var PlanningsPage = /** @class */ (function () {
         else if (this.platform.is('android')) {
             path = this.file.dataDirectory;
         }
-        fileTransfer.download(apiUrl + url, path + url).then(function (entry) {
+        fileTransfer.download(url, path + url).then(function (entry) {
             console.log('open file controle: ', entry);
             _this.document.viewDocument(entry.toURL(), 'application/pdf', {});
         }).catch(function (e) { return console.log('Error opening file: ', e); });

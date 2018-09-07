@@ -316,7 +316,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  header works!\n</p>\n"
+module.exports = "<p>\r\n  header works!\r\n</p>\r\n"
 
 /***/ }),
 
