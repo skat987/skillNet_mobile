@@ -87,4 +87,36 @@ export class DashboardPage implements OnInit {
     .then(resp => console.log('update validation: ', resp))
     .catch(e => console.log('Error updating validation: ', e));
   }
+
+  public filterByModule(moduleId) {
+    // this.moduleSelected = this.formationSelected.modules[
+    //   this.formationSelected.modules.findIndex((module, index, tab) => {
+    //     for (let i; i < this.formationSelected.modules.length; i++) {
+    //       return module['id'] === moduleId;
+    //     }
+    //     console.log('allSkills: ', this.formationSelected.modules);
+    //   })
+    // ];
+  }
+
+  public goToSlide() {
+    this.slides.slideTo(1);
+  }
+
+  slideChanged() {
+    const currentIndex = this.slides.getActiveIndex();
+    console.log('Current index is', currentIndex);
+    const reroll = this.slides.isEnd();
+    if (reroll) {
+      this.slides.slidePrev(5, true);
+    }
+  }
+
+  public slideNext() {
+    this.slides.slideNext();
+  }
+
+  public slidePrev() {
+    this.slides.slidePrev();
+  }
 }
