@@ -42,7 +42,7 @@ export class PlanningsPage implements OnInit {
     } else if (this.platform.is('android')) {
       path = this.file.dataDirectory;
     }
-    fileTransfer.download(url, path + url).then(entry => {
+    fileTransfer.download( url, path + url).then(entry => {
       console.log('open file controle: ', entry);
       this.document.viewDocument(entry.toURL(), 'application/pdf', {});
     }).catch(e => console.log('Error opening file: ', e));
