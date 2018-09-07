@@ -7,30 +7,23 @@
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>
-    <ion-title text-center>Accueil</ion-title>
-    <ion-item slot="end">
-      <!-- <ion-label>Sélectionner une formation</ion-label> -->
-      <ion-select #formationSelect (ionChange)="showFormation(formationSelect.value)" slot="end"> 
+    <ion-title>Accueil</ion-title>
+      <ion-select style="position: absolute; right: 0; color: white;" #formationSelect (ionChange)="showFormation(formationSelect.value)" slot="end"> 
         <ion-select-option *ngFor="let formation of student.formations" [value]="formation">{{ formation.name }}</ion-select-option>
       </ion-select>
-    </ion-item>
   </ion-toolbar>
 </ion-header>
-
 <ion-content padding>
 <ion-grid>
      <ion-row justify-content-start>
       <ion-col size="4">
         <div>
-            <img src="{{ environment.appImageUrl }}{{ formation.logo }}">
+            <img src="{{ formationSelected.logo }}">
         </div>
       </ion-col>
       <ion-col size="4">
         <div>
-          <h6>{{ formation.name }}</h6>
-        </div>
-        <div>
-          <h6>{{ formation.start_at | date: "dd/MM/yyyy" }} - {{ formation.end_at | date: "dd/MM/yyyy" }} </h6>
+          <h6>{{ formationSelected.name }}</h6>
         </div>
       </ion-col>
     </ion-row>
