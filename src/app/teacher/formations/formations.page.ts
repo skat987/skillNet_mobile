@@ -45,6 +45,7 @@ export class FormationsPage implements OnInit {
   public formation: any;
   public formationId: any;
   shownGroup: any;
+  public formationSelected: Formation;
 
   constructor(private apiService: ApiService, private platform: Platform, private authService: AuthService, private router: Router) { }
 
@@ -69,19 +70,16 @@ export class FormationsPage implements OnInit {
           this.teacher.formations[i].addModule(new ModuleFormation(resp['data'][i].modules[j].id, resp['data'][i].modules[j].name));
         }
       }
-    }).then(() => this.setStudents())
-      .catch(e => console.log('Error setting formations list: ', e));
+    }).catch(e => console.log('Error setting formations list: ', e));
   }
 
-  private setStudents(): void {
-    for (let i = 0; i < this.teacher.formations.length; i++) {
-      this.apiService.get('getStudentsOfFormation/' + this.teacher.formations[i].id).then((resp: any) => {
-        for (let j = 0; j < resp.length; j++) {
-          // tslint:disable-next-line:max-line-length
-          this.teacher.formations[i].addStudent(new Student(resp[j].id, resp[j].lastname, resp[j].firstname, resp[j].avatar, resp[j].email, resp[j].gender, resp[j].birthday_date, resp[j].phone_number, null, resp[j].student_id, this.teacher.formations[i].id, new ProgressionTotal(resp[j].progression.totalSkills, resp[j].progression.studentValidations, resp[j].progression.teacherValidations)));
-        }
-      }).catch(e => console.log('Error setting students Lists : ', e));
-    }
+  private setStudents(formationId: any): void {
+    this.apiService.get('getStudentsOfFormation/' + formationId).then((resp: any) => {
+      for (let i = 0; i < resp.length; i++) {
+        // tslint:disable-next-line:max-line-length
+        this.formationSelected.addStudent(new Student(resp[i].id, resp[i].lastname, resp[i].firstname, resp[i].avatar, resp[i].email, resp[i].gender, resp[i].birthday_date, resp[i].phone_number, null, resp[i].student_id, this.teacher.getFormationById(formationId), new ProgressionTotal(resp[i].progression.totalSkills, resp[i].progression.studentValidations, resp[i].progression.teacherValidations)));
+      }
+    }).catch(e => console.log('Error setting students: ', e));
   }
 
   public showStudentDashBoard(studentId: any, formationId: any): void {
@@ -100,7 +98,7 @@ export class FormationsPage implements OnInit {
 
   }
   public showSkills(moduleId: any): void {
-
+    this.formationSelected.getModuleById(moduleId);
     this.moduleSkills = this.modules[
       this.modules.findIndex((module, index, tab) => {
         return module['id'] === moduleId;
@@ -130,16 +128,22 @@ export class FormationsPage implements OnInit {
     this.slides.slidePrev();
   }
 
-  toggleGroup(group) {
+  toggleGroup(group: Formation) {
     if (this.isGroupShown(group)) {
       this.shownGroup = null;
     } else {
       this.shownGroup = group;
     }
+    this.setFormationSelected(group).then((resp: Formation) => this.setStudents(resp.id))
+    .catch(e => console.log('Error setting formation selected: ', e));
   }
 
-  isGroupShown(group) {
+  isGroupShown(group: Formation) {
     return this.shownGroup === group;
+  }
+
+  private setFormationSelected(formation: Formation): Promise<Formation> {
+    return new Promise(resolve => resolve(this.formationSelected = formation));
   }
 
 }

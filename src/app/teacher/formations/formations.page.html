@@ -15,7 +15,7 @@
   <div *ngIf="teacher">
     <div *ngIf="teacher.formations.length">
       <ion-card *ngFor="let formation of teacher.formations; let i=index">
-        <ion-img src="{{ formation.logo }}" (click)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}"></ion-img>
+        <ion-img src="{{ formation.logo }}" (click)="toggleGroup(formation)" [ngClass]="{active: isGroupShown(formation)}"></ion-img>
         <ion-card-content>
           <ion-card-title>{{ formation.name }}</ion-card-title>
           <ion-list *ngIf="formation.modules.length">
@@ -26,9 +26,9 @@
           <p clear small>Elèves</p>
           <ion-badge clear slot="end">{{formation.studentsCount}}</ion-badge>
         </ion-item>
-        <div>
-          <ion-list *ngIf="isGroupShown(i)">
-            <ion-item *ngFor="let student of formation.students" (click)="showStudentDashBoard(student.id, formation.id)">
+        <div *ngIf="formationSelected">
+          <ion-list *ngIf="isGroupShown(formationSelected)">
+            <ion-item *ngFor="let student of formationSelected.students" (click)="showStudentDashBoard(student.id, formationSelected.id)">
               <ion-card text-center>
                 <div text-center>
                   <img src="{{ student.avatar }}">
