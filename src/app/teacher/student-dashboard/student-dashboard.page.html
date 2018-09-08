@@ -27,8 +27,11 @@
             <ion-card-title>{{ student.fullName }}</ion-card-title>
             <ion-list *ngIf="modules.length">
                 <ion-item text-center>
-                    <round-progress class="roundProgressBarTeacher" [current]="" [radius]="45" [color]="environment.progressColorTeacher"
+                    <round-progress class="roundProgressBarTeacher" [current]="50" [radius]="45" [color]="environment.progressColorTeacher"
                         [max]="environment.progressMax" [stroke]="environment.progressStrokeTeacher"></round-progress>
+
+                    <round-progress class="roundProgressBarStudent" [current]="60" [radius]="45" [color]="environment.progressColorStudent"
+                        [max]="environment.progressMax" [stroke]="environment.progressStrokeStudent"></round-progress>
                 </ion-item>
                 <ion-item>
                     <ion-icon name='book' slot="start" style="color: hsl(202, 52%, 56%)"></ion-icon>
