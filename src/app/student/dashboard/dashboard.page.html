@@ -14,46 +14,6 @@
   </ion-toolbar>
 </ion-header>
 
-<<<<<<< HEAD
-<ion-content padding>
-  <ion-card *ngIf="student">
-    <ion-img src="{{ student.avatar }}"></ion-img>
-
-    <ion-card-content>
-      <ion-card-title>{{ student.fullName }}</ion-card-title>
-
-      <ion-list *ngIf="modules.length">
-        <ion-list-header>
-          Module de l'étudiant
-        </ion-list-header>
-        <ion-item *ngFor="let module of modules" (click)="ShowModule(module)">
-          <ion-icon name="arrow-forward" item-end></ion-icon>
-          <ion-label>
-            {{ module.name }}
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-  <div *ngIf="moduleSelected">
-    <h3>Module: {{ moduleSelected.name }}</h3>
-    <h6>Compétences: {{ moduleSelected.progression.skillsCount }}</h6>
-    <h6>Validations du formateur: {{ moduleSelected.progression.teacherValidations }}</h6>
-    <h6>Validations de l'étudiant: {{ moduleSelected.progression.studentValidations }}</h6>
-    <div *ngIf="moduleSelected.skills.length">
-      <ion-list *ngFor="let skill of moduleSelected.skills">
-        <ion-item>
-          <ion-label>Compétences: {{ skill.name }}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Validation du formateur</ion-label>
-          <ion-checkbox color="light" [(ngModel)]="skill.progression.teacherValue" disabled="true"></ion-checkbox>
-        </ion-item>
-        <ion-item>
-          <ion-label>Validation de l'étudiant</ion-label>
-          <ion-checkbox color="light" [(ngModel)]="skill.progression.studentValue" (ionChange)="updateValidation(skill.progression.id, skill.progression.studentValue)"></ion-checkbox>
-        </ion-item>
-=======
 <ion-content class="Container">
   <div *ngIf="formationSelected">
     <div class="logo">
@@ -131,15 +91,10 @@
             <ion-checkbox color="teacher" [(ngModel)]="skill.progression.teacherValue" disabled="true"></ion-checkbox>
           </ion-item>
         </ion-card>
->>>>>>> c01e0504e73cf04d21b506d33dab89982d4dacb8
       </ion-list>
       <h6>Total de compétences: {{ moduleSelected.progression.skillsCount }}</h6>
       <h6 text-left>Validé par formateur: {{ moduleSelected.progression.teacherValidations }} - Validé par étudiant: {{
         moduleSelected.progression.studentValidations }}</h6>
     </div>
   </div>
-<<<<<<< HEAD
 </ion-content>
-=======
-</ion-content>
->>>>>>> c01e0504e73cf04d21b506d33dab89982d4dacb8
