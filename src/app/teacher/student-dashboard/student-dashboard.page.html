@@ -24,7 +24,6 @@
     <div *ngIf="student">
         <div *ngIf="!display">
             <img src="{{ student.avatar }}" />
-            <ion-card-title>{{ student.fullName }}</ion-card-title>
             <ion-list *ngIf="modules.length">
                 <ion-item text-center>
                     <round-progress class="roundProgressBarTeacher" [current]="" [radius]="45" [color]="environment.progressColorTeacher"

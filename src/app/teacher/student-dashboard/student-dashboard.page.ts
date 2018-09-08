@@ -36,10 +36,18 @@ export class StudentDashboardPage implements OnInit {
     private setStudent(studentId: any, formationId: any): void {
         this.apiService.get('getStudentDatas/' + studentId + '/ofFormation/' + formationId).then((resp: any) => {
             // tslint:disable-next-line:max-line-length
-            this.student = new Student(resp['student'].user_id, resp['student'].user_lastname, resp['student'].user_firstname, resp['student'].user_avatar);
+            this.student = new Student(resp['student'].user_id, resp['student'].user_lastname, resp['student'].user_firstname, resp['student'].user_avatar, null, null, null, null, null, null, null, new ProgressionTotal());
+            this.student.progression.skillsCount = 0;
+            this.student.progression.studentValidations = 0;
+            this.student.progression.teacherValidations = 0;
             this.modules = [];
             let currentModule: ModuleFormation;
             for (let i = 0; i < resp['modules'].length; i++) {
+                this.student.progression.skillsCount = this.student.progression.skillsCount + resp['modules'][i].totalSkills;
+                // tslint:disable-next-line:max-line-length
+                this.student.progression.studentValidations = this.student.progression.studentValidations + resp['modules'][i].progression.student;
+                // tslint:disable-next-line:max-line-length
+                this.student.progression.teacherValidations = this.student.progression.teacherValidations + resp['modules'][i].progression.teacher;
                 // tslint:disable-next-line:max-line-length
                 currentModule = new ModuleFormation(resp['modules'][i].id, resp['modules'][i].name, new ProgressionTotal(resp['modules'][i].totalSkills, resp['modules'][i].progression.student, resp['modules'][i].progression.teacher));
                 for (let j = 0; j < resp['modules'][i].skills.length; j++) {
