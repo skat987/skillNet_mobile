@@ -1,51 +1,72 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>student-dashboard</ion-title>
-  </ion-toolbar>
+    <ion-toolbar *ngIf="!display">
+        <ion-buttons slot="start">
+            <ion-menu-toggle>
+                <ion-button>
+                    <ion-icon name="menu"></ion-icon>
+                </ion-button>
+            </ion-menu-toggle>
+        </ion-buttons>
+        <ion-title>Student dashboard</ion-title>
+    </ion-toolbar>
+    <ion-toolbar *ngIf="moduleSelected">
+        <ion-thumbnail slot="start">
+            <img src="{{ student.avatar }}">
+        </ion-thumbnail>
+        <ion-title>{{ student.fullName }}</ion-title>
+    </ion-toolbar>
+    <ion-toolbar *ngIf="moduleSelected" (click)="back()" text-center color="danger">
+        <ion-title>Retour</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-card *ngIf="student">
-    <ion-img src="{{ student.avatar }}"></ion-img>
-  
-    <ion-card-content>
-      <ion-card-title>{{ student.fullName }}</ion-card-title>
-  
-      <ion-list *ngIf="modules.length">
-        <ion-list-header>
-          Module de l'étudiant
-        </ion-list-header>
-        <ion-item *ngFor="let module of modules" (click)="ShowModule(module)">
-          <ion-icon name="arrow-forward" item-end></ion-icon>
-          <ion-label>
-            {{ module.name }}
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-  <div *ngIf="moduleSelected">
-    <h3>Module: {{ moduleSelected.name }}</h3>
-    <h6>Compétences: {{ moduleSelected.progression.skillsCount }}</h6>
-    <h6>Validations du formateur: {{ moduleSelected.progression.teacherValidations }}</h6>
-    <h6>Validations de l'étudiant: {{ moduleSelected.progression.studentValidations }}</h6>
-    <div *ngIf="moduleSelected.skills.length">      
-      <ion-list *ngFor="let skill of moduleSelected.skills">
-        <ion-item>
-          <ion-label>Compétences: {{ skill.name }}</ion-label>          
-        </ion-item>
-        <ion-item>
-          <ion-label>Formateur: {{ skill.teacher.fullName }}</ion-label>          
-        </ion-item>
-        <ion-item>
-          <ion-label>Validation du formateur</ion-label>
-          <ion-checkbox color="light" [(ngModel)]="skill.progression.teacherValue" (ionChange)="updateValidation(skill.progression.id, skill.progression.teacherValue)"></ion-checkbox>
-        </ion-item>
-        <ion-item>
-          <ion-label>Validation de l'étudiant</ion-label>
-          <ion-checkbox color="light" [(ngModel)]="skill.progression.studentValue" disabled="true"></ion-checkbox>
-        </ion-item>
-      </ion-list>
+    <div *ngIf="student">
+        <div *ngIf="!display">
+            <img src="{{ student.avatar }}" />
+            <ion-card-title>{{ student.fullName }}</ion-card-title>
+            <ion-list *ngIf="modules.length">
+                <ion-item text-center>
+                    <round-progress class="roundProgressBarTeacher" [current]="" [radius]="45" [color]="environment.progressColorTeacher"
+                        [max]="environment.progressMax" [stroke]="environment.progressStrokeTeacher"></round-progress>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name='book' slot="start" style="color: hsl(202, 52%, 56%)"></ion-icon>
+                    <p clear small>Modules</p>
+                    <ion-badge clear slot="end">{{modules.length}}</ion-badge>
+                </ion-item>
+                <ion-card *ngFor="let module of modules" (click)=" ShowModule(module)" [ngClass]="{active: isGroupShown(module)}">
+                    <ion-label text-center>
+                        {{ module.name }}
+                    </ion-label>
+                </ion-card>
+            </ion-list>
+        </div>
+        <!-- ============================================== Partie Show/Hidden ==============================================  -->
+        <div *ngIf="moduleSelected">
+            <h3>Module: {{ moduleSelected.name }}</h3>
+            <h6>Compétences: {{ moduleSelected.progression.skillsCount }}</h6>
+            <h6>Validations du formateur: {{ moduleSelected.progression.teacherValidations }}</h6>
+            <h6>Validations de l'étudiant: {{ moduleSelected.progression.studentValidations }}</h6>
+            <div *ngIf="moduleSelected.skills.length">
+                <ion-list *ngFor="let skill of moduleSelected.skills">
+                    <ion-item>
+                        <ion-label style="white-space: normal;">Compétences: {{ skill.name }}</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Formateur: {{ skill.teacher.fullName }}</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Validation du formateur</ion-label>
+                        <ion-checkbox color="light" [(ngModel)]="skill.progression.teacherValue" (ionChange)="updateValidation(skill.progression.id, skill.progression.teacherValue)"></ion-checkbox>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Validation de l'étudiant</ion-label>
+                        <ion-checkbox color="light" [(ngModel)]="skill.progression.studentValue" disabled="true"></ion-checkbox>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+        <!-- ============================================== Fin Partie Show/Hidden ==============================================  -->
     </div>
-  </div>  
 </ion-content>

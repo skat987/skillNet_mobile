@@ -19,12 +19,15 @@ import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 // Components
 import { MenuComponent } from './layout/menu/menu.component';
 
+// Native components
+import { RoundProgressModule } from 'angular-svg-round-progressbar';
 @NgModule({
   declarations: [AppComponent, MenuComponent],
   entryComponents: [],
   imports: [
     HttpClientModule,
     BrowserModule,
+    RoundProgressModule,
     IonicModule.forRoot(),
     AppRoutingModule
   ],
@@ -35,8 +38,8 @@ import { MenuComponent } from './layout/menu/menu.component';
     NativeStorage,
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

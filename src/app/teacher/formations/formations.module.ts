@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { FormationsPage } from './formations.page';
+import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
 const routes: Routes = [
   {
@@ -19,8 +20,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    RoundProgressModule,
     RouterModule.forChild(routes)
   ],
   declarations: [FormationsPage]
 })
-export class FormationsPageModule {}
+export class FormationsPageModule { }
