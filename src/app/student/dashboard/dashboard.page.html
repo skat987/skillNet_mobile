@@ -8,56 +8,57 @@
       </ion-menu-toggle>
     </ion-buttons>
     <ion-title>Accueil</ion-title>
-    <ion-select style="position: absolute; right: 0; color: white;" #formationSelect (ionChange)="showFormation(formationSelect.value)"
-      slot="end">
+    <ion-select *ngIf="student && student.formations.length" [(ngModel)]="formationSelected" style="position: absolute; right: 0; color: white;" (ionChange)="showFormation()" slot="end">
       <ion-select-option *ngFor="let formation of student.formations" [value]="formation">{{ formation.name }}</ion-select-option>
     </ion-select>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="Container">
-  <div class="logo">
-    <img src="{{ formationSelected.logo }}">
-  </div>
-  <div class="moduleContainer">
-    <h3 style="color: #2E1166; margin: 0;" text-uppercase text-center>Modules</h3>
-    <ion-slides *ngIf="formationSelected.modules.length">
-      <ion-slide class="roundProgressBarWrapper slideImportant" style="width: 500px;" *ngFor="let module of formationSelected.modules" (click)="showModule(module)">
-        <ion-label class="moduleName">{{ module.name }}</ion-label>
-        <round-progress class="roundProgressBarTeacher" [current]="module.progression.teacherValidations * 100/module.progression.skillsCount"
-          [radius]="45" [color]="environment.progressColorTeacher" [max]="environment.progressMax" [stroke]="environment.progressStrokeTeacher"></round-progress>
-
-        <round-progress class="roundProgressBarStudent" [current]="module.progression.studentValidations * 100/module.progression.skillsCount"
-          [radius]="45" [color]="environment.progressColorStudent" [max]="environment.progressMax" [stroke]="environment.progressStrokeStudent"></round-progress>
-
-        <div class="progressTeacherText red">{{ (module.progression.teacherValidations *
-          100/module.progression.skillsCount) | number: '1.0-0' }}%</div>
-        <div class="progressStudentText purple">{{ (module.progression.studentValidations *
-          100/module.progression.skillsCount) | number: '1.0-0' }}%</div>
-      </ion-slide>
-    </ion-slides>
-
-    <div class="swiper-button-next" (click)="slideNext()"></div>
-    <div class="swiper-button-prev" (click)="slidePrev()"></div>
-
-    <ion-grid style="padding: 0;">
-      <ion-row justify-content-start>
-        <ion-col class="square" size="4">
-          <ion-icon name="square" class="purple"></ion-icon>&nbsp;Etudiant
-        </ion-col>
-
-        <ion-col class="square" size="4">
-          <ion-icon name="square" class="red"></ion-icon>&nbsp;Formateurs
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
+  <div *ngIf="formationSelected">
+    <div class="logo">
+      <img src="{{ formationSelected.logo }}">
+    </div>
+    <div class="moduleContainer">
+      <h2 style="color: #2E1166;"text-uppercase text-center>Modules</h2>
+      <ion-slides *ngIf="formationSelected.modules.length">
+        <ion-slide class="roundProgressBarWrapper slideImportant" *ngFor="let module of formationSelected.modules" (click)="showModule(module)">
+          <ion-label class="moduleName">{{ module.name }}</ion-label>
+          <round-progress class="roundProgressBarTeacher" [current]="module.progression.teacherValidations * 100/module.progression.skillsCount"
+            [radius]="45" [color]="environment.progressColorTeacher" [max]="environment.progressMax" [stroke]="environment.progressStrokeTeacher"></round-progress>
+  
+          <round-progress class="roundProgressBarStudent" [current]="module.progression.studentValidations * 100/module.progression.skillsCount"
+            [radius]="45" [color]="environment.progressColorStudent" [max]="environment.progressMax" [stroke]="environment.progressStrokeStudent"></round-progress>
+  
+          <div class="progressTeacherText red">{{ (module.progression.teacherValidations *
+            100/module.progression.skillsCount) | number: '1.0-0' }}%</div>
+          <div class="progressStudentText purple">{{ (module.progression.studentValidations *
+            100/module.progression.skillsCount) | number: '1.0-0' }}%</div>
+        </ion-slide>
+      </ion-slides>
+  
+      <div class="swiper-button-next" (click)="slideNext()"></div>
+      <div class="swiper-button-prev" (click)="slidePrev()"></div>
+  
+      <ion-grid>
+        <ion-row justify-content-start>
+          <ion-col size="4">
+            <ion-icon name="square" class="purple"></ion-icon>&nbsp;Etudiant
+          </ion-col>
+  
+          <ion-col size="4">
+            <ion-icon name="square" class="red"></ion-icon>&nbsp;Formateurs
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>  
 
   <div>
-    <h3 style="color:white;" text-uppercase text-center>Compétences</h3>
-    <div *ngIf="!moduleSelected">
-      <ion-list class="Container" *ngFor="let module of formationSelected.modules ">
-        <ion-card style="background-color: white" *ngFor="let skill of module.skills" class="cardShadows">
+    <h2 style="color:white;" text-uppercase text-center>Compétences</h2>
+    <div *ngIf="!moduleSelected && formationSelected">
+      <ion-list *ngFor="let module of formationSelected.modules ">
+        <ion-card *ngFor="let skill of module.skills" class="cardShadows">
           <h4 text-center>{{ module.name }}</h4>
           <ion-item>
             <ion-label text-wrap>{{ skill.name }}</ion-label>

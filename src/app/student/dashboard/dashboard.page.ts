@@ -13,7 +13,9 @@ import { ProgressionDetails } from '../../models/progression-details';
 // Services
 import { AuthService } from '../../service/auth/auth.service';
 import { ApiService } from '../../service/api/api.service';
-import { environment } from './../../../environments/environment.prod';
+
+// Env
+import { environment } from './../../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,7 +27,6 @@ export class DashboardPage implements OnInit {
   public student: Student;
   public formationSelected: Formation;
   public moduleSelected: ModuleFormation;
-  public formation: any;
   public environment = environment;
 
   // tslint:disable-next-line:max-line-length
@@ -53,6 +54,18 @@ export class DashboardPage implements OnInit {
     .catch(e => console.log('Error setting formations: ', e));
   }
 
+  public showFormation(): void {
+    this.setFormationSelected().then((resp: Formation) => this.setModules(resp.id))
+    .catch(e => console.log('Error showing formation: ', e));
+  }
+
+  private setFormationSelected(): Promise<Formation> {
+    return new Promise(resolve => {
+      // tslint:disable-next-line:max-line-length
+      resolve(this.formationSelected = (!this.formationSelected) ? this.student.getFormationById(this.student.currentFormationId) : this.formationSelected);
+    });
+  }
+
   private setModules(formationId: any): void {
     this.apiService.get('getFormationForAdmin/' + formationId).then((resp: any) => {
       let currentModule: ModuleFormation;
@@ -68,22 +81,6 @@ export class DashboardPage implements OnInit {
     }).catch(e => console.log('Error setting modules: ', e));
   }
 
-  public showFormation(formation?: Formation): void {
-    if (!formation) {
-      this.setFormationSelected().then((resp: Formation) => this.setModules(resp.id))
-      .catch(e => console.log('Error setting Formation selected: ', e));
-    } else {
-      this.setFormationSelected(formation).then((resp: Formation) => this.setModules(resp.id))
-      .catch(e => console.log('Error setting formation selected: ', e));
-    }
-  }
-
-  private setFormationSelected(formation?: Formation): Promise<Formation> {
-    return new Promise(resolve => {
-      resolve(this.formationSelected = (!formation) ? this.student.getFormationById(this.student.currentFormationId) : formation);
-    });
-  }
-
   public showModule(module: ModuleFormation): void {
     this.moduleSelected = module;
   }
@@ -92,17 +89,6 @@ export class DashboardPage implements OnInit {
     this.apiService.put('progression/updateStudentValidation', { progression_id: progressionId, student_validation: validation })
     .then(resp => console.log('update validation: ', resp))
     .catch(e => console.log('Error updating validation: ', e));
-  }
-
-  public filterByModule(moduleId) {
-    // this.moduleSelected = this.formationSelected.modules[
-    //   this.formationSelected.modules.findIndex((module, index, tab) => {
-    //     for (let i; i < this.formationSelected.modules.length; i++) {
-    //       return module['id'] === moduleId;
-    //     }
-    //     console.log('allSkills: ', this.formationSelected.modules);
-    //   })
-    // ];
   }
 
   public goToSlide() {
