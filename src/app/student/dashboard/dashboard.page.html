@@ -20,9 +20,9 @@
       <img src="{{ formationSelected.logo }}">
     </div>
     <div class="moduleContainer">
-      <h2 style="color: #2E1166;"text-uppercase text-center>Modules</h2>
+      <h3 style="color: #2E1166; margin: 0;"text-uppercase text-center>Modules</h3>
       <ion-slides *ngIf="formationSelected.modules.length">
-        <ion-slide class="roundProgressBarWrapper slideImportant" *ngFor="let module of formationSelected.modules" (click)="showModule(module)">
+        <ion-slide style="width: 500px;" class="roundProgressBarWrapper slideImportant" *ngFor="let module of formationSelected.modules" (click)="showModule(module)">
           <ion-label class="moduleName">{{ module.name }}</ion-label>
           <round-progress class="roundProgressBarTeacher" [current]="module.progression.teacherValidations * 100/module.progression.skillsCount"
             [radius]="45" [color]="environment.progressColorTeacher" [max]="environment.progressMax" [stroke]="environment.progressStrokeTeacher"></round-progress>
@@ -40,13 +40,13 @@
       <div class="swiper-button-next" (click)="slideNext()"></div>
       <div class="swiper-button-prev" (click)="slidePrev()"></div>
   
-      <ion-grid>
+      <ion-grid style="padding: 0;">
         <ion-row justify-content-start>
-          <ion-col size="4">
+          <ion-col class="square"  size="4">
             <ion-icon name="square" class="purple"></ion-icon>&nbsp;Etudiant
           </ion-col>
   
-          <ion-col size="4">
+          <ion-col class="square"  size="4">
             <ion-icon name="square" class="red"></ion-icon>&nbsp;Formateurs
           </ion-col>
         </ion-row>
@@ -54,11 +54,11 @@
     </div>
   </div>  
 
-  <div>
-    <h2 style="color:white;" text-uppercase text-center>Compétences</h2>
+  <div class="">
+    <h3 style="color:white;" text-uppercase text-center>Compétences</h3>
     <div *ngIf="!moduleSelected && formationSelected">
-      <ion-list *ngFor="let module of formationSelected.modules ">
-        <ion-card *ngFor="let skill of module.skills" class="cardShadows">
+      <ion-list class="Container"  *ngFor="let module of formationSelected.modules ">
+        <ion-card style="background-color: white" *ngFor="let skill of module.skills" class="cardShadows">
           <h4 text-center>{{ module.name }}</h4>
           <ion-item>
             <ion-label text-wrap>{{ skill.name }}</ion-label>
