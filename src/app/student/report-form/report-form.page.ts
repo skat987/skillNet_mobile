@@ -29,14 +29,15 @@ export class ReportFormPage implements OnInit {
   get f() { return this.newReportForm.controls; }
 
   public onSubmit(): void {
+    console.log('create controle 1: ', this.newReportForm.value);
     if (this.newReportForm.invalid) { return; }
     const dataReport = {
       title: this.f.title.value,
-      date: new Date(this.f.date.value.year.value, this.f.date.value.month.value, this.f.date.value.day.value).toDateString(),
+      date: new Date(this.f.date.value.year.value, this.f.date.value.month.value, this.f.date.value.day.value).toJSON(),
       text: this.f.text.value,
       rate: this.f.rate.value
     };
-    console.log('create controle: ', dataReport);
+    console.log('create controle 2: ', dataReport);
     this.apiService.post('report/create', dataReport)
     .then(resp => console.log('create report: ', resp))
     .catch(e => console.log('Error creating report: ', e));

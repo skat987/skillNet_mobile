@@ -20,6 +20,7 @@
           <ion-card-title>{{ formation.name }}</ion-card-title>
           <ion-list *ngIf="formation.modules.length">
           </ion-list>
+<<<<<<< HEAD
         </ion-card-content>
         <ion-item>
           <ion-icon name='people' slot="start" style="color: hsl(202, 52%, 56%)"></ion-icon>
@@ -28,6 +29,12 @@
         </ion-item>
         <div>
           <ion-list *ngIf="isGroupShown(i)">
+=======
+          <ion-list *ngIf="formation.students.length">
+            <ion-list-header>
+              Etudiants de la formation: {{ formation.studentsCount }}
+            </ion-list-header>
+>>>>>>> c01e0504e73cf04d21b506d33dab89982d4dacb8
             <ion-item *ngFor="let student of formation.students" (click)="showStudentDashBoard(student.id, formation.id)">
               <ion-card text-center>
                 <div text-center>

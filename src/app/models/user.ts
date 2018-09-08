@@ -9,7 +9,7 @@ export class User {
     birthDate: any;
     phone: any;
     token: any;
-    user_type_id: any;
+    userTypeId: any;
 
     constructor () {}
 }
