@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 // Services
 import { ApiService } from '../../service/api/api.service';
@@ -22,6 +23,7 @@ export class StudentDashboardPage implements OnInit {
     public modules: ModuleFormation[] = [];
     public moduleSelected: ModuleFormation;
     public display: any;
+    environment = environment;
 
     // tslint:disable-next-line:max-line-length
     constructor(private platform: Platform, private route: ActivatedRoute, private apiService: ApiService) { }
