@@ -44,10 +44,6 @@ export class PlanningsPage implements OnInit {
     }
     fileTransfer.download( url, path + url).then(entry => {
       console.log('open file controle: ', entry);
-      // const options: DocumentViewerOptions = {
-      //   title: url
-      // };
-
       this.document.viewDocument(entry.toURL(), 'application/pdf', {});
     }).catch(e => console.log('Error opening file: ', e));
   }
